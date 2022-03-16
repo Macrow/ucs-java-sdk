@@ -1,4 +1,5 @@
 # ucs-java-sdk
+[![](https://jitpack.io/v/Macrow/ucs-java-sdk.svg)](https://jitpack.io/#Macrow/ucs-java-sdk)
 
 用于集成```ucs```的开发包
 
