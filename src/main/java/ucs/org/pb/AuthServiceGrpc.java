@@ -1,4 +1,4 @@
-package zyys.com.ucs.pb;
+package ucs.org.pb;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 

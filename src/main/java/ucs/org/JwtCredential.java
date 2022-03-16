@@ -1,4 +1,4 @@
-package zyys.com.ucs;
+package ucs.org;
 
 import io.grpc.CallCredentials;
 import io.grpc.Metadata;

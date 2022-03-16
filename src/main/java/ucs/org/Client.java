@@ -1,9 +1,9 @@
-package zyys.com.ucs;
+package ucs.org;
 
 import cn.hutool.core.io.IoUtil;
 import io.grpc.*;
-import zyys.com.ucs.pb.AuthServiceGrpc;
-import zyys.com.ucs.pb.UcsPb;
+import ucs.org.pb.AuthServiceGrpc;
+import ucs.org.pb.UcsPb;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

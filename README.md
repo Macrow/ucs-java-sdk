@@ -7,7 +7,7 @@
 ### 安装
 ```
 <dependency>
-    <groupId>com.zyys</groupId>
+    <groupId>ucs.org</groupId>
     <artifactId>ucs-java-sdk</artifactId>
     <version>1.0.0</version>
 </dependency>

@@ -1,4 +1,4 @@
-package zyys.com.ucs;
+package ucs.org;
 
 import cn.hutool.core.codec.Base64Decoder;
 import io.jsonwebtoken.Claims;

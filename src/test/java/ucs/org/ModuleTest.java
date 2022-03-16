@@ -1,13 +1,7 @@
-package zyys.com;
-
-import static org.junit.Assert.assertTrue;
+package ucs.org;
 
 import cn.hutool.json.JSONUtil;
 import org.junit.Test;
-import zyys.com.ucs.Client;
-import zyys.com.ucs.JwtUser;
-import zyys.com.ucs.ValidateResult;
-import zyys.com.ucs.Validator;
 
 public class ModuleTest {
     final String CERT = "-----BEGIN CERTIFICATE-----\n" +
