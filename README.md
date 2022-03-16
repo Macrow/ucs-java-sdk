@@ -4,10 +4,20 @@
 
 ## 快速开始
 
+### 添加安装源
+```
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+
 ### 安装
 ```
-<dependency>
-    <groupId>ucs.org</groupId>
+dependency>
+    <groupId>com.github.Macrow</groupId>
     <artifactId>ucs-java-sdk</artifactId>
     <version>1.0.0</version>
 </dependency>
