@@ -88,8 +88,27 @@ public class HttpClient implements Client {
         boolean success = false;
         String reason = Constant.UNKNOWN_MSG;
         try {
-            HttpRequest req = HttpRequest.of(this.baseUrl + url)
-                    .timeout(this.timeout * 1000)
+            HttpRequest req;
+            switch (method) {
+                case POST:
+                    req = HttpRequest.post(this.baseUrl + url);
+                    break;
+                case PUT:
+                    req = HttpRequest.put(this.baseUrl + url);
+                    break;
+                case PATCH:
+                    req = HttpRequest.patch(this.baseUrl + url);
+                    break;
+                case DELETE:
+                    req = HttpRequest.delete(this.baseUrl + url);
+                    break;
+                case GET:
+                default:
+                    req = HttpRequest.get(this.baseUrl + url);
+                    break;
+            }
+
+            req.timeout(this.timeout * 1000)
                     .method(method)
                     .header(Constant.BEARER_NAME, Constant.BEARER_TYPE + " " + this.token, false)
                     .header(this.accessCodeHeader, this.accessCode, false)
