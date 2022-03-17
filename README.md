@@ -32,8 +32,9 @@ JwtUser jwtUser = v.ValidateJwt(TOKEN);
 
 ### 创建连接UCS的客户端
 ```
-Client client = new Client("your.domain.com", yourPort);
-// Client client = new Client(certFile, "your.domain.com", yourPort) // TLS连接，需要UCS服务也同时开启
+Client client = new RpcClient("your.domain.com", yourPort); // Rpc方式
+// Client client = new RpcClient(certFile, "your.domain.com", yourPort) // TLS连接，需要UCS服务也同时开启
+// Client client = new HttpClient("your.domain.com", yourPort, useSSL, yourAccessCode"); // Http方式
 client.SetToken(token)
 ```
 
