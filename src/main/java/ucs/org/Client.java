@@ -46,7 +46,9 @@ public class Client {
     }
 
     public Client SetTimeout(int timeout) {
-        this.timeout = timeout;
+        if (timeout > 0) {
+            this.timeout = timeout;
+        }
         return this;
     }
 
@@ -90,10 +92,10 @@ public class Client {
                     .build();
         } catch (Exception e) {
             if (e.getMessage().contains(Constant.DEADLINE_EXCEEDED)) {
-                return ValidateResult.builder().success(false).code(4).reason("timeout").build();
+                return ValidateResult.builder().success(false).code(Constant.TIMEOUT_CODE).reason(Constant.TIMEOUT_MSG).build();
             }
             e.printStackTrace();
-            return ValidateResult.builder().success(false).code(9).reason("unknown").build();
+            return ValidateResult.builder().success(false).code(Constant.UNKNOWN_CODE).reason(Constant.UNKNOWN_MSG).build();
         } finally {
             this.channel.shutdown();
         }
@@ -113,12 +115,12 @@ public class Client {
                     .build();
         } catch (Exception e) {
             if (e.getMessage().contains(Constant.DEADLINE_EXCEEDED)) {
-                return ValidateResult.builder().success(false).code(4).reason("timeout").build();
+                return ValidateResult.builder().success(false).code(Constant.TIMEOUT_CODE).reason(Constant.TIMEOUT_MSG).build();
             }
             e.printStackTrace();
-            return ValidateResult.builder().success(false).code(9).reason("unknown").build();
+            return ValidateResult.builder().success(false).code(Constant.UNKNOWN_CODE).reason(Constant.UNKNOWN_MSG).build();
         } finally {
-            this.channel.shutdown();
+            channel.shutdown();
         }
     }
 
