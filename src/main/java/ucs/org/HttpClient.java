@@ -15,20 +15,15 @@ import java.util.Map;
  * @date 2022-03-17
  */
 public class HttpClient implements Client {
-    private final String address;
-    private final int port;
-    private final boolean ssl;
+    private final String baseUrl;
     private String accessCodeHeader;
     private String randomKeyHeader;
     private final String accessCode;
     private String token = null;
     private int timeout = Constant.DEFAULT_TIMEOUT_IN_SECONDS;
-    private String baseUrl = null;
 
-    public HttpClient(String address, int port, boolean ssl, String accessCode) {
-        this.address = address;
-        this.port = port;
-        this.ssl = ssl;
+    public HttpClient(String baseUrl, String accessCode) {
+        this.baseUrl = baseUrl;
         this.accessCode = accessCode;
         this.accessCodeHeader = Constant.DefaultHeaderAccessCode;
         this.randomKeyHeader = Constant.DefaultHeaderRandomKey;
@@ -91,20 +86,20 @@ public class HttpClient implements Client {
             HttpRequest req;
             switch (method) {
                 case POST:
-                    req = HttpRequest.post(this.baseUrl + url);
+                    req = HttpRequest.post(baseUrl + url);
                     break;
                 case PUT:
-                    req = HttpRequest.put(this.baseUrl + url);
+                    req = HttpRequest.put(baseUrl + url);
                     break;
                 case PATCH:
-                    req = HttpRequest.patch(this.baseUrl + url);
+                    req = HttpRequest.patch(baseUrl + url);
                     break;
                 case DELETE:
-                    req = HttpRequest.delete(this.baseUrl + url);
+                    req = HttpRequest.delete(baseUrl + url);
                     break;
                 case GET:
                 default:
-                    req = HttpRequest.get(this.baseUrl + url);
+                    req = HttpRequest.get(baseUrl + url);
                     break;
             }
 
@@ -149,7 +144,7 @@ public class HttpClient implements Client {
             throw new IllegalArgumentException("please provide token first");
         }
         if (this.baseUrl == null || this.baseUrl.isEmpty()) {
-            this.baseUrl = String.format("http%s://%s:%d", (this.ssl ? "s" : ""), this.address, this.port);
+            throw new IllegalArgumentException("please provide baseUrl first");
         }
     }
 

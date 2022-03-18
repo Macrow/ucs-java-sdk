@@ -50,28 +50,28 @@ public class ModuleTest {
 
     @Test
     public void testRpcNormal() {
-        Client c = new RpcClient("localhost", 8919);
+        Client c = new RpcClient("localhost:8919");
         c = c.SetToken(TOKEN);
         testValidateStaff(c);
     }
 
     @Test
     public void testRpcTLS() {
-        Client c = new RpcClient(CERT, "localhost", 8919);
+        Client c = new RpcClient(CERT, "localhost:8919");
         c = c.SetToken(TOKEN);
         testValidateStaff(c);
     }
 
     @Test
     public void testHttpNormal() {
-        Client c = new HttpClient("localhost", 8019, false, "1A2B3C4D");
+        Client c = new HttpClient("http://localhost:8019", "1A2B3C4D");
         c = c.SetToken(TOKEN);
         testValidateStaff(c);
     }
 
     @Test
     public void testHttpTLS() {
-        Client c = new HttpClient("localhost", 8019, true, "1A2B3C4D");
+        Client c = new HttpClient("https://localhost:8019", "1A2B3C4D");
         c = c.SetToken(TOKEN);
         testValidateStaff(c);
     }

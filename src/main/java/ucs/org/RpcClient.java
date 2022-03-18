@@ -15,21 +15,18 @@ import java.util.concurrent.TimeUnit;
  */
 public class RpcClient implements Client {
     private final String address;
-    private final int port;
     private AuthServiceGrpc.AuthServiceBlockingStub blockingStub;
     private ManagedChannel channel;
     private JwtCredential jwtCredential = null;
     private ChannelCredentials tlsCredential = null;
     private int timeout = Constant.DEFAULT_TIMEOUT_IN_SECONDS;
 
-    public RpcClient(String address, int port) {
+    public RpcClient(String address) {
         this.address = address;
-        this.port = port;
     }
 
-    public RpcClient(String cert, String address, int port) {
+    public RpcClient(String cert, String address) {
         this.address = address;
-        this.port = port;
         TlsChannelCredentials.Builder tlsBuilder = TlsChannelCredentials.newBuilder();
         try {
             tlsBuilder.trustManager(IoUtil.toStream(cert, StandardCharsets.UTF_8));
@@ -136,10 +133,20 @@ public class RpcClient implements Client {
         if (this.jwtCredential == null) {
             throw new IllegalArgumentException("please provide token first");
         }
+        String[] array = address.split(":");
+        if (array.length != 2) {
+            throw new IllegalArgumentException("wrong address");
+        }
+        int port;
+        try {
+            port = Integer.parseInt(array[1]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("wrong address");
+        }
         if (this.tlsCredential == null) {
-            this.channel = ManagedChannelBuilder.forAddress(address, port).usePlaintext().build();
+            this.channel = ManagedChannelBuilder.forAddress(array[0], port).usePlaintext().build();
         } else {
-            this.channel = Grpc.newChannelBuilderForAddress(address, port, tlsCredential).build();
+            this.channel = Grpc.newChannelBuilderForAddress(array[0], port, tlsCredential).build();
         }
         this.blockingStub = AuthServiceGrpc.newBlockingStub(channel);
     }
