@@ -20,7 +20,7 @@
 dependency>
     <groupId>com.github.Macrow</groupId>
     <artifactId>ucs-java-sdk</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
@@ -32,9 +32,9 @@ JwtUser jwtUser = v.ValidateJwt(TOKEN);
 
 ### 创建连接UCS的客户端
 ```
-Client client = new RpcClient("your.domain.com", yourPort); // Rpc方式
-// Client client = new RpcClient(certFile, "your.domain.com", yourPort) // TLS连接，需要UCS服务也同时开启
-// Client client = new HttpClient("your.domain.com", yourPort, useSSL, yourAccessCode"); // Http方式
+Client client = new RpcClient("your.domain.com:port"); // Rpc方式
+// Client client = new RpcClient(certFile, "your.domain.com:port") // TLS连接，需要UCS服务也同时开启
+// Client client = new HttpClient("https://your.domain.com:port", yourAccessCode"); // Http方式
 client.SetToken(token)
 ```
 
