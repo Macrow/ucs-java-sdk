@@ -78,13 +78,6 @@ public class HttpClient implements Client {
         return request(Constant.ValidatePermOrgByIdURL, Method.POST, formData);
     }
 
-    @Override
-    public UcsResult<RenewTokenResult> RenewToken() {
-        Map<String, Object> formData = new HashMap<>();
-        formData.put("token", token);
-        return request(Constant.RenewTokenURL, Method.POST, formData);
-    }
-
     private <T> UcsResult<T> request(String url, Method method, Map<String, Object> formData) {
         prepare();
         boolean success = false;
@@ -134,10 +127,6 @@ public class HttpClient implements Client {
                                 message = Constant.UNAUTHORIZED_MSG;
                             }
                             res = (T) permitResult;
-                        }
-                        if (result.getResult().get("token") != null) {
-                            RenewTokenResult renewTokenResult = result.getResult().toBean(RenewTokenResult.class);
-                            res = (T) renewTokenResult;
                         }
                     }
                 }

@@ -85,38 +85,6 @@ public class RpcClient implements Client {
                 .build());
     }
 
-    @Override
-    public UcsResult<RenewTokenResult> RenewToken() {
-        this.prepare();
-        try {
-            UcsPb.RenewTokenResult res = blockingStub
-                    .withCallCredentials(jwtCredential)
-                    .withDeadlineAfter(timeout, TimeUnit.SECONDS)
-                    .renewToken(UcsPb.RenewTokenRequest.newBuilder().build());
-            return UcsResult.<RenewTokenResult>builder()
-                    .success(res.getSuccess())
-                    .message(res.getMessage())
-                    .result(RenewTokenResult.builder().token(res.getToken()).build())
-                    .build();
-        } catch (Exception e) {
-            if (e.getMessage().contains(Constant.DEADLINE_EXCEEDED)) {
-                return UcsResult.<RenewTokenResult>builder()
-                        .success(false)
-                        .message(Constant.TIMEOUT_MSG)
-                        .result(RenewTokenResult.builder().token(null).build())
-                        .build();
-            }
-            e.printStackTrace();
-            return UcsResult.<RenewTokenResult>builder()
-                    .success(false)
-                    .message(Constant.UNKNOWN_MSG)
-                    .result(RenewTokenResult.builder().token(null).build())
-                    .build();
-        } finally {
-            this.channel.shutdown();
-        }
-    }
-
     private UcsResult<Object> authentication(UcsPb.AuthenticationRequest req) {
         this.prepare();
         try {

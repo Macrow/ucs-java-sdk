@@ -18,6 +18,4 @@ public interface Client {
     UcsResult<PermitResult> ValidatePermAction(String service, String path, String method);
 
     UcsResult<PermitResult> ValidatePermOrgById(String orgId);
-
-    UcsResult<RenewTokenResult> RenewToken();
 }

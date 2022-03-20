@@ -20,7 +20,7 @@
 dependency>
     <groupId>com.github.Macrow</groupId>
     <artifactId>ucs-java-sdk</artifactId>
-    <version>1.3.0</version>
+    <version>1.3.1</version>
 </dependency>
 ```
 
@@ -36,11 +36,6 @@ Client client = new RpcClient("your.domain.com:port"); // Rpc方式
 // Client client = new RpcClient(certFile, "your.domain.com:port") // TLS连接，需要UCS服务也同时开启
 // Client client = new HttpClient("https://your.domain.com:port", yourAccessCode"); // Http方式
 client.SetToken(token)
-```
-
-### 如果令牌过期了，重新获取令牌
-```
-Result res = client.RenewToken();
 ```
 
 ### UCS服务端验证Jwt

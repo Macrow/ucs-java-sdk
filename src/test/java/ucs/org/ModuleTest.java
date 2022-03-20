@@ -92,9 +92,6 @@ public class ModuleTest {
 
         res = c.ValidatePermOrgById("c8fjca649b3hbmov5n60");
         print(res);
-
-        res = c.RenewToken();
-        print(res);
     }
 
     private void print(UcsResult res) {

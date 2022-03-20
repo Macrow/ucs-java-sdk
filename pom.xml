@@ -6,7 +6,7 @@
 
   <groupId>com.github.Macrow</groupId>
   <artifactId>ucs-java-sdk</artifactId>
-  <version>1.3.0</version>
+  <version>1.3.1</version>
   <packaging>jar</packaging>
 
   <name>ucs-java-sdk</name>
