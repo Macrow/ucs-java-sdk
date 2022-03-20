@@ -16,9 +16,10 @@ import java.util.Date;
 public class JwtUser {
     private String id;
     private String name;
-    private String did;
-    private String iss;
-    private Date iat;
-    private Date exp;
+    private String deviceId;
+    private String deviceName;
+    private String issuer;
+    private Date issueAt;
+    private Date expireAt;
     private String token;
 }

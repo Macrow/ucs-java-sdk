@@ -17,6 +17,7 @@ public class Validator {
     public static final String JwtTokenClaimsId = "id";
     public static final String JwtTokenClaimsName = "name";
     public static final String JwtTokenClaimsDeviceId = "did";
+    public static final String JwtTokenClaimsDeviceName = "dn";
     public static final String JwtTokenClaimsIssuer = "iss";
     public static final String JwtTokenClaimsIssueAt = "iat";
     public static final String JwtTokenClaimsExpireAt = "exp";
@@ -49,10 +50,11 @@ public class Validator {
         return JwtUser.builder()
                 .id(claims.get(JwtTokenClaimsId, String.class))
                 .name(claims.get(JwtTokenClaimsName, String.class))
-                .did(claims.get(JwtTokenClaimsDeviceId, String.class))
-                .iss(claims.get(JwtTokenClaimsIssuer, String.class))
-                .iat(claims.get(JwtTokenClaimsIssueAt, Date.class))
-                .exp(claims.get(JwtTokenClaimsExpireAt, Date.class))
+                .deviceId(claims.get(JwtTokenClaimsDeviceId, String.class))
+                .deviceName(claims.get(JwtTokenClaimsDeviceName, String.class))
+                .issuer(claims.get(JwtTokenClaimsIssuer, String.class))
+                .issueAt(claims.get(JwtTokenClaimsIssueAt, Date.class))
+                .expireAt(claims.get(JwtTokenClaimsExpireAt, Date.class))
                 .token(tokenString)
                 .build();
     }
