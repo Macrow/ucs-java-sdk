@@ -11,11 +11,13 @@ public interface Client {
 
     Client SetHttpHeaderNames(String accessCodeHeader, String randomKeyHeader);
 
-    UcsResult ValidateJwt();
+    UcsResult<Object> ValidateJwt();
 
-    UcsResult ValidatePermOperationByCode(String code);
+    UcsResult<PermitResult> ValidatePermOperationByCode(String code);
 
-    UcsResult ValidatePermAction(String service, String path, String method);
+    UcsResult<PermitResult> ValidatePermAction(String service, String path, String method);
 
-    UcsResult ValidatePermOrgById(String orgId);
+    UcsResult<PermitResult> ValidatePermOrgById(String orgId);
+
+    UcsResult<RenewTokenResult> RenewToken();
 }

@@ -1544,6 +1544,424 @@ public final class UcsPb {
 
   }
 
+  public interface RenewTokenRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pb.RenewTokenRequest)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code pb.RenewTokenRequest}
+   */
+  public static final class RenewTokenRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:pb.RenewTokenRequest)
+      RenewTokenRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use RenewTokenRequest.newBuilder() to construct.
+    private RenewTokenRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RenewTokenRequest() {
+    }
+
+    @Override
+    @SuppressWarnings({"unused"})
+    protected Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new RenewTokenRequest();
+    }
+
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RenewTokenRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return UcsPb.internal_static_pb_RenewTokenRequest_descriptor;
+    }
+
+    @Override
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return UcsPb.internal_static_pb_RenewTokenRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              RenewTokenRequest.class, Builder.class);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      unknownFields.writeTo(output);
+    }
+
+    @Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof RenewTokenRequest)) {
+        return super.equals(obj);
+      }
+      RenewTokenRequest other = (RenewTokenRequest) obj;
+
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static RenewTokenRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static RenewTokenRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static RenewTokenRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static RenewTokenRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static RenewTokenRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static RenewTokenRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static RenewTokenRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static RenewTokenRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static RenewTokenRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static RenewTokenRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static RenewTokenRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static RenewTokenRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(RenewTokenRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code pb.RenewTokenRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:pb.RenewTokenRequest)
+        RenewTokenRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return UcsPb.internal_static_pb_RenewTokenRequest_descriptor;
+      }
+
+      @Override
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return UcsPb.internal_static_pb_RenewTokenRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                RenewTokenRequest.class, Builder.class);
+      }
+
+      // Construct using ucs.org.pb.UcsPb.RenewTokenRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @Override
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      @Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return UcsPb.internal_static_pb_RenewTokenRequest_descriptor;
+      }
+
+      @Override
+      public RenewTokenRequest getDefaultInstanceForType() {
+        return RenewTokenRequest.getDefaultInstance();
+      }
+
+      @Override
+      public RenewTokenRequest build() {
+        RenewTokenRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @Override
+      public RenewTokenRequest buildPartial() {
+        RenewTokenRequest result = new RenewTokenRequest(this);
+        onBuilt();
+        return result;
+      }
+
+      @Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return super.setField(field, value);
+      }
+      @Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof RenewTokenRequest) {
+          return mergeFrom((RenewTokenRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(RenewTokenRequest other) {
+        if (other == RenewTokenRequest.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        RenewTokenRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (RenewTokenRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      @Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:pb.RenewTokenRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:pb.RenewTokenRequest)
+    private static final RenewTokenRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new RenewTokenRequest();
+    }
+
+    public static RenewTokenRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<RenewTokenRequest>
+        PARSER = new com.google.protobuf.AbstractParser<RenewTokenRequest>() {
+      @Override
+      public RenewTokenRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RenewTokenRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RenewTokenRequest> parser() {
+      return PARSER;
+    }
+
+    @Override
+    public com.google.protobuf.Parser<RenewTokenRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @Override
+    public RenewTokenRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ActionOrBuilder extends
       // @@protoc_insertion_point(interface_extends:pb.Action)
       com.google.protobuf.MessageOrBuilder {
@@ -2423,19 +2841,16 @@ public final class UcsPb {
     boolean getSuccess();
 
     /**
-     * <code>.pb.Error error = 2;</code>
-     * @return Whether the error field is set.
+     * <code>string message = 2;</code>
+     * @return The message.
      */
-    boolean hasError();
+    String getMessage();
     /**
-     * <code>.pb.Error error = 2;</code>
-     * @return The error.
+     * <code>string message = 2;</code>
+     * @return The bytes for message.
      */
-    Error getError();
-    /**
-     * <code>.pb.Error error = 2;</code>
-     */
-    ErrorOrBuilder getErrorOrBuilder();
+    com.google.protobuf.ByteString
+        getMessageBytes();
   }
   /**
    * Protobuf type {@code pb.Result}
@@ -2450,6 +2865,7 @@ public final class UcsPb {
       super(builder);
     }
     private Result() {
+      message_ = "";
     }
 
     @Override
@@ -2488,16 +2904,9 @@ public final class UcsPb {
               break;
             }
             case 18: {
-              Error.Builder subBuilder = null;
-              if (error_ != null) {
-                subBuilder = error_.toBuilder();
-              }
-              error_ = input.readMessage(Error.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(error_);
-                error_ = subBuilder.buildPartial();
-              }
+              String s = input.readStringRequireUtf8();
 
+              message_ = s;
               break;
             }
             default: {
@@ -2543,30 +2952,42 @@ public final class UcsPb {
       return success_;
     }
 
-    public static final int ERROR_FIELD_NUMBER = 2;
-    private Error error_;
+    public static final int MESSAGE_FIELD_NUMBER = 2;
+    private volatile Object message_;
     /**
-     * <code>.pb.Error error = 2;</code>
-     * @return Whether the error field is set.
+     * <code>string message = 2;</code>
+     * @return The message.
      */
     @Override
-    public boolean hasError() {
-      return error_ != null;
+    public String getMessage() {
+      Object ref = message_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        message_ = s;
+        return s;
+      }
     }
     /**
-     * <code>.pb.Error error = 2;</code>
-     * @return The error.
+     * <code>string message = 2;</code>
+     * @return The bytes for message.
      */
     @Override
-    public Error getError() {
-      return error_ == null ? Error.getDefaultInstance() : error_;
-    }
-    /**
-     * <code>.pb.Error error = 2;</code>
-     */
-    @Override
-    public ErrorOrBuilder getErrorOrBuilder() {
-      return getError();
+    public com.google.protobuf.ByteString
+        getMessageBytes() {
+      Object ref = message_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2586,8 +3007,8 @@ public final class UcsPb {
       if (success_ != false) {
         output.writeBool(1, success_);
       }
-      if (error_ != null) {
-        output.writeMessage(2, getError());
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
       }
       unknownFields.writeTo(output);
     }
@@ -2602,9 +3023,8 @@ public final class UcsPb {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(1, success_);
       }
-      if (error_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getError());
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2623,11 +3043,8 @@ public final class UcsPb {
 
       if (getSuccess()
           != other.getSuccess()) return false;
-      if (hasError() != other.hasError()) return false;
-      if (hasError()) {
-        if (!getError()
-            .equals(other.getError())) return false;
-      }
+      if (!getMessage()
+          .equals(other.getMessage())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2642,10 +3059,8 @@ public final class UcsPb {
       hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getSuccess());
-      if (hasError()) {
-        hash = (37 * hash) + ERROR_FIELD_NUMBER;
-        hash = (53 * hash) + getError().hashCode();
-      }
+      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getMessage().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2781,12 +3196,8 @@ public final class UcsPb {
         super.clear();
         success_ = false;
 
-        if (errorBuilder_ == null) {
-          error_ = null;
-        } else {
-          error_ = null;
-          errorBuilder_ = null;
-        }
+        message_ = "";
+
         return this;
       }
 
@@ -2814,11 +3225,7 @@ public final class UcsPb {
       public Result buildPartial() {
         Result result = new Result(this);
         result.success_ = success_;
-        if (errorBuilder_ == null) {
-          result.error_ = error_;
-        } else {
-          result.error_ = errorBuilder_.build();
-        }
+        result.message_ = message_;
         onBuilt();
         return result;
       }
@@ -2870,8 +3277,9 @@ public final class UcsPb {
         if (other.getSuccess() != false) {
           setSuccess(other.getSuccess());
         }
-        if (other.hasError()) {
-          mergeError(other.getError());
+        if (!other.getMessage().isEmpty()) {
+          message_ = other.message_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2933,123 +3341,80 @@ public final class UcsPb {
         return this;
       }
 
-      private Error error_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          Error, Error.Builder, ErrorOrBuilder> errorBuilder_;
+      private Object message_ = "";
       /**
-       * <code>.pb.Error error = 2;</code>
-       * @return Whether the error field is set.
+       * <code>string message = 2;</code>
+       * @return The message.
        */
-      public boolean hasError() {
-        return errorBuilder_ != null || error_ != null;
-      }
-      /**
-       * <code>.pb.Error error = 2;</code>
-       * @return The error.
-       */
-      public Error getError() {
-        if (errorBuilder_ == null) {
-          return error_ == null ? Error.getDefaultInstance() : error_;
+      public String getMessage() {
+        Object ref = message_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          message_ = s;
+          return s;
         } else {
-          return errorBuilder_.getMessage();
+          return (String) ref;
         }
       }
       /**
-       * <code>.pb.Error error = 2;</code>
+       * <code>string message = 2;</code>
+       * @return The bytes for message.
        */
-      public Builder setError(Error value) {
-        if (errorBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          error_ = value;
-          onChanged();
+      public com.google.protobuf.ByteString
+          getMessageBytes() {
+        Object ref = message_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          message_ = b;
+          return b;
         } else {
-          errorBuilder_.setMessage(value);
+          return (com.google.protobuf.ByteString) ref;
         }
-
-        return this;
       }
       /**
-       * <code>.pb.Error error = 2;</code>
+       * <code>string message = 2;</code>
+       * @param value The message to set.
+       * @return This builder for chaining.
        */
-      public Builder setError(
-          Error.Builder builderForValue) {
-        if (errorBuilder_ == null) {
-          error_ = builderForValue.build();
-          onChanged();
-        } else {
-          errorBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.pb.Error error = 2;</code>
-       */
-      public Builder mergeError(Error value) {
-        if (errorBuilder_ == null) {
-          if (error_ != null) {
-            error_ =
-              Error.newBuilder(error_).mergeFrom(value).buildPartial();
-          } else {
-            error_ = value;
-          }
-          onChanged();
-        } else {
-          errorBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.pb.Error error = 2;</code>
-       */
-      public Builder clearError() {
-        if (errorBuilder_ == null) {
-          error_ = null;
-          onChanged();
-        } else {
-          error_ = null;
-          errorBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.pb.Error error = 2;</code>
-       */
-      public Error.Builder getErrorBuilder() {
-        
+      public Builder setMessage(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        message_ = value;
         onChanged();
-        return getErrorFieldBuilder().getBuilder();
+        return this;
       }
       /**
-       * <code>.pb.Error error = 2;</code>
+       * <code>string message = 2;</code>
+       * @return This builder for chaining.
        */
-      public ErrorOrBuilder getErrorOrBuilder() {
-        if (errorBuilder_ != null) {
-          return errorBuilder_.getMessageOrBuilder();
-        } else {
-          return error_ == null ?
-              Error.getDefaultInstance() : error_;
-        }
+      public Builder clearMessage() {
+        
+        message_ = getDefaultInstance().getMessage();
+        onChanged();
+        return this;
       }
       /**
-       * <code>.pb.Error error = 2;</code>
+       * <code>string message = 2;</code>
+       * @param value The bytes for message to set.
+       * @return This builder for chaining.
        */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          Error, Error.Builder, ErrorOrBuilder>
-          getErrorFieldBuilder() {
-        if (errorBuilder_ == null) {
-          errorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              Error, Error.Builder, ErrorOrBuilder>(
-                  getError(),
-                  getParentForChildren(),
-                  isClean());
-          error_ = null;
-        }
-        return errorBuilder_;
+      public Builder setMessageBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        message_ = value;
+        onChanged();
+        return this;
       }
       @Override
       public final Builder setUnknownFields(
@@ -3104,49 +3469,62 @@ public final class UcsPb {
 
   }
 
-  public interface ErrorOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:pb.Error)
+  public interface RenewTokenResultOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pb.RenewTokenResult)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int32 code = 1;</code>
-     * @return The code.
+     * <code>bool success = 1;</code>
+     * @return The success.
      */
-    int getCode();
+    boolean getSuccess();
 
     /**
-     * <code>string reason = 2;</code>
-     * @return The reason.
+     * <code>string message = 2;</code>
+     * @return The message.
      */
-    String getReason();
+    String getMessage();
     /**
-     * <code>string reason = 2;</code>
-     * @return The bytes for reason.
+     * <code>string message = 2;</code>
+     * @return The bytes for message.
      */
     com.google.protobuf.ByteString
-        getReasonBytes();
+        getMessageBytes();
+
+    /**
+     * <code>string token = 3;</code>
+     * @return The token.
+     */
+    String getToken();
+    /**
+     * <code>string token = 3;</code>
+     * @return The bytes for token.
+     */
+    com.google.protobuf.ByteString
+        getTokenBytes();
   }
   /**
-   * Protobuf type {@code pb.Error}
+   * Protobuf type {@code pb.RenewTokenResult}
    */
-  public static final class Error extends
+  public static final class RenewTokenResult extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:pb.Error)
-      ErrorOrBuilder {
+      // @@protoc_insertion_point(message_implements:pb.RenewTokenResult)
+      RenewTokenResultOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use Error.newBuilder() to construct.
-    private Error(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use RenewTokenResult.newBuilder() to construct.
+    private RenewTokenResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private Error() {
-      reason_ = "";
+    private RenewTokenResult() {
+      message_ = "";
+      token_ = "";
     }
 
     @Override
     @SuppressWarnings({"unused"})
     protected Object newInstance(
         UnusedPrivateParameter unused) {
-      return new Error();
+      return new RenewTokenResult();
     }
 
     @Override
@@ -3154,7 +3532,7 @@ public final class UcsPb {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private Error(
+    private RenewTokenResult(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3174,13 +3552,19 @@ public final class UcsPb {
               break;
             case 8: {
 
-              code_ = input.readInt32();
+              success_ = input.readBool();
               break;
             }
             case 18: {
               String s = input.readStringRequireUtf8();
 
-              reason_ = s;
+              message_ = s;
+              break;
+            }
+            case 26: {
+              String s = input.readStringRequireUtf8();
+
+              token_ = s;
               break;
             }
             default: {
@@ -3204,60 +3588,98 @@ public final class UcsPb {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return UcsPb.internal_static_pb_Error_descriptor;
+      return UcsPb.internal_static_pb_RenewTokenResult_descriptor;
     }
 
     @Override
     protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return UcsPb.internal_static_pb_Error_fieldAccessorTable
+      return UcsPb.internal_static_pb_RenewTokenResult_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              Error.class, Builder.class);
+              RenewTokenResult.class, Builder.class);
     }
 
-    public static final int CODE_FIELD_NUMBER = 1;
-    private int code_;
+    public static final int SUCCESS_FIELD_NUMBER = 1;
+    private boolean success_;
     /**
-     * <code>int32 code = 1;</code>
-     * @return The code.
+     * <code>bool success = 1;</code>
+     * @return The success.
      */
     @Override
-    public int getCode() {
-      return code_;
+    public boolean getSuccess() {
+      return success_;
     }
 
-    public static final int REASON_FIELD_NUMBER = 2;
-    private volatile Object reason_;
+    public static final int MESSAGE_FIELD_NUMBER = 2;
+    private volatile Object message_;
     /**
-     * <code>string reason = 2;</code>
-     * @return The reason.
+     * <code>string message = 2;</code>
+     * @return The message.
      */
     @Override
-    public String getReason() {
-      Object ref = reason_;
+    public String getMessage() {
+      Object ref = message_;
       if (ref instanceof String) {
         return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         String s = bs.toStringUtf8();
-        reason_ = s;
+        message_ = s;
         return s;
       }
     }
     /**
-     * <code>string reason = 2;</code>
-     * @return The bytes for reason.
+     * <code>string message = 2;</code>
+     * @return The bytes for message.
      */
     @Override
     public com.google.protobuf.ByteString
-        getReasonBytes() {
-      Object ref = reason_;
+        getMessageBytes() {
+      Object ref = message_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (String) ref);
-        reason_ = b;
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TOKEN_FIELD_NUMBER = 3;
+    private volatile Object token_;
+    /**
+     * <code>string token = 3;</code>
+     * @return The token.
+     */
+    @Override
+    public String getToken() {
+      Object ref = token_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        token_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string token = 3;</code>
+     * @return The bytes for token.
+     */
+    @Override
+    public com.google.protobuf.ByteString
+        getTokenBytes() {
+      Object ref = token_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        token_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -3278,11 +3700,14 @@ public final class UcsPb {
     @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (code_ != 0) {
-        output.writeInt32(1, code_);
+      if (success_ != false) {
+        output.writeBool(1, success_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(reason_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, reason_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(token_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, token_);
       }
       unknownFields.writeTo(output);
     }
@@ -3293,12 +3718,15 @@ public final class UcsPb {
       if (size != -1) return size;
 
       size = 0;
-      if (code_ != 0) {
+      if (success_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, code_);
+          .computeBoolSize(1, success_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(reason_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, reason_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(token_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, token_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3310,15 +3738,17 @@ public final class UcsPb {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof Error)) {
+      if (!(obj instanceof RenewTokenResult)) {
         return super.equals(obj);
       }
-      Error other = (Error) obj;
+      RenewTokenResult other = (RenewTokenResult) obj;
 
-      if (getCode()
-          != other.getCode()) return false;
-      if (!getReason()
-          .equals(other.getReason())) return false;
+      if (getSuccess()
+          != other.getSuccess()) return false;
+      if (!getMessage()
+          .equals(other.getMessage())) return false;
+      if (!getToken()
+          .equals(other.getToken())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3330,78 +3760,81 @@ public final class UcsPb {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + getCode();
-      hash = (37 * hash) + REASON_FIELD_NUMBER;
-      hash = (53 * hash) + getReason().hashCode();
+      hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getSuccess());
+      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getMessage().hashCode();
+      hash = (37 * hash) + TOKEN_FIELD_NUMBER;
+      hash = (53 * hash) + getToken().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Error parseFrom(
+    public static RenewTokenResult parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Error parseFrom(
+    public static RenewTokenResult parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Error parseFrom(
+    public static RenewTokenResult parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Error parseFrom(
+    public static RenewTokenResult parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Error parseFrom(byte[] data)
+    public static RenewTokenResult parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Error parseFrom(
+    public static RenewTokenResult parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Error parseFrom(java.io.InputStream input)
+    public static RenewTokenResult parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static Error parseFrom(
+    public static RenewTokenResult parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Error parseDelimitedFrom(java.io.InputStream input)
+    public static RenewTokenResult parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Error parseDelimitedFrom(
+    public static RenewTokenResult parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Error parseFrom(
+    public static RenewTokenResult parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static Error parseFrom(
+    public static RenewTokenResult parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3414,7 +3847,7 @@ public final class UcsPb {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Error prototype) {
+    public static Builder newBuilder(RenewTokenResult prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @Override
@@ -3430,26 +3863,26 @@ public final class UcsPb {
       return builder;
     }
     /**
-     * Protobuf type {@code pb.Error}
+     * Protobuf type {@code pb.RenewTokenResult}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:pb.Error)
-        ErrorOrBuilder {
+        // @@protoc_insertion_point(builder_implements:pb.RenewTokenResult)
+        RenewTokenResultOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return UcsPb.internal_static_pb_Error_descriptor;
+        return UcsPb.internal_static_pb_RenewTokenResult_descriptor;
       }
 
       @Override
       protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return UcsPb.internal_static_pb_Error_fieldAccessorTable
+        return UcsPb.internal_static_pb_RenewTokenResult_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                Error.class, Builder.class);
+                RenewTokenResult.class, Builder.class);
       }
 
-      // Construct using ucs.org.pb.UcsPb.Error.newBuilder()
+      // Construct using ucs.org.pb.UcsPb.RenewTokenResult.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -3467,9 +3900,11 @@ public final class UcsPb {
       @Override
       public Builder clear() {
         super.clear();
-        code_ = 0;
+        success_ = false;
 
-        reason_ = "";
+        message_ = "";
+
+        token_ = "";
 
         return this;
       }
@@ -3477,17 +3912,17 @@ public final class UcsPb {
       @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return UcsPb.internal_static_pb_Error_descriptor;
+        return UcsPb.internal_static_pb_RenewTokenResult_descriptor;
       }
 
       @Override
-      public Error getDefaultInstanceForType() {
-        return Error.getDefaultInstance();
+      public RenewTokenResult getDefaultInstanceForType() {
+        return RenewTokenResult.getDefaultInstance();
       }
 
       @Override
-      public Error build() {
-        Error result = buildPartial();
+      public RenewTokenResult build() {
+        RenewTokenResult result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -3495,10 +3930,11 @@ public final class UcsPb {
       }
 
       @Override
-      public Error buildPartial() {
-        Error result = new Error(this);
-        result.code_ = code_;
-        result.reason_ = reason_;
+      public RenewTokenResult buildPartial() {
+        RenewTokenResult result = new RenewTokenResult(this);
+        result.success_ = success_;
+        result.message_ = message_;
+        result.token_ = token_;
         onBuilt();
         return result;
       }
@@ -3537,21 +3973,25 @@ public final class UcsPb {
       }
       @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Error) {
-          return mergeFrom((Error)other);
+        if (other instanceof RenewTokenResult) {
+          return mergeFrom((RenewTokenResult)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Error other) {
-        if (other == Error.getDefaultInstance()) return this;
-        if (other.getCode() != 0) {
-          setCode(other.getCode());
+      public Builder mergeFrom(RenewTokenResult other) {
+        if (other == RenewTokenResult.getDefaultInstance()) return this;
+        if (other.getSuccess() != false) {
+          setSuccess(other.getSuccess());
         }
-        if (!other.getReason().isEmpty()) {
-          reason_ = other.reason_;
+        if (!other.getMessage().isEmpty()) {
+          message_ = other.message_;
+          onChanged();
+        }
+        if (!other.getToken().isEmpty()) {
+          token_ = other.token_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -3569,11 +4009,11 @@ public final class UcsPb {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        Error parsedMessage = null;
+        RenewTokenResult parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Error) e.getUnfinishedMessage();
+          parsedMessage = (RenewTokenResult) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -3583,109 +4023,185 @@ public final class UcsPb {
         return this;
       }
 
-      private int code_ ;
+      private boolean success_ ;
       /**
-       * <code>int32 code = 1;</code>
-       * @return The code.
+       * <code>bool success = 1;</code>
+       * @return The success.
        */
       @Override
-      public int getCode() {
-        return code_;
+      public boolean getSuccess() {
+        return success_;
       }
       /**
-       * <code>int32 code = 1;</code>
-       * @param value The code to set.
+       * <code>bool success = 1;</code>
+       * @param value The success to set.
        * @return This builder for chaining.
        */
-      public Builder setCode(int value) {
+      public Builder setSuccess(boolean value) {
         
-        code_ = value;
+        success_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int32 code = 1;</code>
+       * <code>bool success = 1;</code>
        * @return This builder for chaining.
        */
-      public Builder clearCode() {
+      public Builder clearSuccess() {
         
-        code_ = 0;
+        success_ = false;
         onChanged();
         return this;
       }
 
-      private Object reason_ = "";
+      private Object message_ = "";
       /**
-       * <code>string reason = 2;</code>
-       * @return The reason.
+       * <code>string message = 2;</code>
+       * @return The message.
        */
-      public String getReason() {
-        Object ref = reason_;
+      public String getMessage() {
+        Object ref = message_;
         if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           String s = bs.toStringUtf8();
-          reason_ = s;
+          message_ = s;
           return s;
         } else {
           return (String) ref;
         }
       }
       /**
-       * <code>string reason = 2;</code>
-       * @return The bytes for reason.
+       * <code>string message = 2;</code>
+       * @return The bytes for message.
        */
       public com.google.protobuf.ByteString
-          getReasonBytes() {
-        Object ref = reason_;
+          getMessageBytes() {
+        Object ref = message_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (String) ref);
-          reason_ = b;
+          message_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string reason = 2;</code>
-       * @param value The reason to set.
+       * <code>string message = 2;</code>
+       * @param value The message to set.
        * @return This builder for chaining.
        */
-      public Builder setReason(
+      public Builder setMessage(
           String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        reason_ = value;
+        message_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string reason = 2;</code>
+       * <code>string message = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearReason() {
+      public Builder clearMessage() {
         
-        reason_ = getDefaultInstance().getReason();
+        message_ = getDefaultInstance().getMessage();
         onChanged();
         return this;
       }
       /**
-       * <code>string reason = 2;</code>
-       * @param value The bytes for reason to set.
+       * <code>string message = 2;</code>
+       * @param value The bytes for message to set.
        * @return This builder for chaining.
        */
-      public Builder setReasonBytes(
+      public Builder setMessageBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        reason_ = value;
+        message_ = value;
+        onChanged();
+        return this;
+      }
+
+      private Object token_ = "";
+      /**
+       * <code>string token = 3;</code>
+       * @return The token.
+       */
+      public String getToken() {
+        Object ref = token_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          token_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>string token = 3;</code>
+       * @return The bytes for token.
+       */
+      public com.google.protobuf.ByteString
+          getTokenBytes() {
+        Object ref = token_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          token_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string token = 3;</code>
+       * @param value The token to set.
+       * @return This builder for chaining.
+       */
+      public Builder setToken(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        token_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string token = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearToken() {
+        
+        token_ = getDefaultInstance().getToken();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string token = 3;</code>
+       * @param value The bytes for token to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTokenBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        token_ = value;
         onChanged();
         return this;
       }
@@ -3702,41 +4218,41 @@ public final class UcsPb {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:pb.Error)
+      // @@protoc_insertion_point(builder_scope:pb.RenewTokenResult)
     }
 
-    // @@protoc_insertion_point(class_scope:pb.Error)
-    private static final Error DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:pb.RenewTokenResult)
+    private static final RenewTokenResult DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Error();
+      DEFAULT_INSTANCE = new RenewTokenResult();
     }
 
-    public static Error getDefaultInstance() {
+    public static RenewTokenResult getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<Error>
-        PARSER = new com.google.protobuf.AbstractParser<Error>() {
+    private static final com.google.protobuf.Parser<RenewTokenResult>
+        PARSER = new com.google.protobuf.AbstractParser<RenewTokenResult>() {
       @Override
-      public Error parsePartialFrom(
+      public RenewTokenResult parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Error(input, extensionRegistry);
+        return new RenewTokenResult(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<Error> parser() {
+    public static com.google.protobuf.Parser<RenewTokenResult> parser() {
       return PARSER;
     }
 
     @Override
-    public com.google.protobuf.Parser<Error> getParserForType() {
+    public com.google.protobuf.Parser<RenewTokenResult> getParserForType() {
       return PARSER;
     }
 
     @Override
-    public Error getDefaultInstanceForType() {
+    public RenewTokenResult getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3753,6 +4269,11 @@ public final class UcsPb {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_pb_AuthorizationRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_pb_RenewTokenRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_pb_RenewTokenRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_pb_Action_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -3763,10 +4284,10 @@ public final class UcsPb {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_pb_Result_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_pb_Error_descriptor;
+    internal_static_pb_RenewTokenResult_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_pb_Error_fieldAccessorTable;
+      internal_static_pb_RenewTokenResult_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3779,15 +4300,18 @@ public final class UcsPb {
       "\n\nauth.proto\022\002pb\"\027\n\025AuthenticationReques" +
       "t\"i\n\024AuthorizationRequest\022\027\n\roperationCo" +
       "de\030\001 \001(\tH\000\022\034\n\006action\030\002 \001(\0132\n.pb.ActionH\000" +
-      "\022\017\n\005orgId\030\003 \001(\tH\000B\t\n\007payload\"7\n\006Action\022\017" +
-      "\n\007service\030\001 \001(\t\022\014\n\004path\030\002 \001(\t\022\016\n\006method\030" +
-      "\003 \001(\t\"3\n\006Result\022\017\n\007success\030\001 \001(\010\022\030\n\005erro" +
-      "r\030\002 \001(\0132\t.pb.Error\"%\n\005Error\022\014\n\004code\030\001 \001(" +
-      "\005\022\016\n\006reason\030\002 \001(\t2\201\001\n\013AuthService\0229\n\016Aut" +
-      "hentication\022\031.pb.AuthenticationRequest\032\n" +
-      ".pb.Result\"\000\0227\n\rAuthorization\022\030.pb.Autho" +
-      "rizationRequest\032\n.pb.Result\"\000B\"\n\nucs.org" +
-      ".pbB\005UcsPbZ\rproto/auth/pbb\006proto3"
+      "\022\017\n\005orgId\030\003 \001(\tH\000B\t\n\007payload\"\023\n\021RenewTok" +
+      "enRequest\"7\n\006Action\022\017\n\007service\030\001 \001(\t\022\014\n\004" +
+      "path\030\002 \001(\t\022\016\n\006method\030\003 \001(\t\"*\n\006Result\022\017\n\007" +
+      "success\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\"C\n\020RenewT" +
+      "okenResult\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002" +
+      " \001(\t\022\r\n\005token\030\003 \001(\t2\276\001\n\013AuthService\0229\n\016A" +
+      "uthentication\022\031.pb.AuthenticationRequest" +
+      "\032\n.pb.Result\"\000\0227\n\rAuthorization\022\030.pb.Aut" +
+      "horizationRequest\032\n.pb.Result\"\000\022;\n\nRenew" +
+      "Token\022\025.pb.RenewTokenRequest\032\024.pb.RenewT" +
+      "okenResult\"\000B\"\n\nucs.org.pbB\005UcsPbZ\rproto" +
+      "/auth/pbb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3805,24 +4329,30 @@ public final class UcsPb {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_pb_AuthorizationRequest_descriptor,
         new String[] { "OperationCode", "Action", "OrgId", "Payload", });
-    internal_static_pb_Action_descriptor =
+    internal_static_pb_RenewTokenRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_pb_RenewTokenRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_pb_RenewTokenRequest_descriptor,
+        new String[] { });
+    internal_static_pb_Action_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_pb_Action_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_pb_Action_descriptor,
         new String[] { "Service", "Path", "Method", });
     internal_static_pb_Result_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_pb_Result_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_pb_Result_descriptor,
-        new String[] { "Success", "Error", });
-    internal_static_pb_Error_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_pb_Error_fieldAccessorTable = new
+        new String[] { "Success", "Message", });
+    internal_static_pb_RenewTokenResult_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_pb_RenewTokenResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_pb_Error_descriptor,
-        new String[] { "Code", "Reason", });
+        internal_static_pb_RenewTokenResult_descriptor,
+        new String[] { "Success", "Message", "Token", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

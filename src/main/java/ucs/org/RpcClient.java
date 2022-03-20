@@ -57,18 +57,18 @@ public class RpcClient implements Client {
     }
 
     @Override
-    public UcsResult ValidateJwt() {
+    public UcsResult<Object> ValidateJwt() {
         return authentication(UcsPb.AuthenticationRequest.newBuilder().build());
     }
 
     @Override
-    public UcsResult ValidatePermOperationByCode(String code) {
+    public UcsResult<PermitResult> ValidatePermOperationByCode(String code) {
         return authorization(UcsPb.AuthorizationRequest.newBuilder()
                 .setOperationCode(code)
                 .build());
     }
 
-    public UcsResult ValidatePermAction(String service, String path, String method) {
+    public UcsResult<PermitResult> ValidatePermAction(String service, String path, String method) {
         return authorization(UcsPb.AuthorizationRequest.newBuilder()
                 .setAction(UcsPb.Action.newBuilder()
                         .setService(service)
@@ -79,13 +79,45 @@ public class RpcClient implements Client {
     }
 
     @Override
-    public UcsResult ValidatePermOrgById(String orgId) {
+    public UcsResult<PermitResult> ValidatePermOrgById(String orgId) {
         return authorization(UcsPb.AuthorizationRequest.newBuilder()
                 .setOrgId(orgId)
                 .build());
     }
 
-    private UcsResult authentication(UcsPb.AuthenticationRequest req) {
+    @Override
+    public UcsResult<RenewTokenResult> RenewToken() {
+        this.prepare();
+        try {
+            UcsPb.RenewTokenResult res = blockingStub
+                    .withCallCredentials(jwtCredential)
+                    .withDeadlineAfter(timeout, TimeUnit.SECONDS)
+                    .renewToken(UcsPb.RenewTokenRequest.newBuilder().build());
+            return UcsResult.<RenewTokenResult>builder()
+                    .success(res.getSuccess())
+                    .message(res.getMessage())
+                    .result(RenewTokenResult.builder().token(res.getToken()).build())
+                    .build();
+        } catch (Exception e) {
+            if (e.getMessage().contains(Constant.DEADLINE_EXCEEDED)) {
+                return UcsResult.<RenewTokenResult>builder()
+                        .success(false)
+                        .message(Constant.TIMEOUT_MSG)
+                        .result(RenewTokenResult.builder().token(null).build())
+                        .build();
+            }
+            e.printStackTrace();
+            return UcsResult.<RenewTokenResult>builder()
+                    .success(false)
+                    .message(Constant.UNKNOWN_MSG)
+                    .result(RenewTokenResult.builder().token(null).build())
+                    .build();
+        } finally {
+            this.channel.shutdown();
+        }
+    }
+
+    private UcsResult<Object> authentication(UcsPb.AuthenticationRequest req) {
         this.prepare();
         try {
             UcsPb.Result res = blockingStub
@@ -94,36 +126,45 @@ public class RpcClient implements Client {
                     .authentication(req);
             return UcsResult.builder()
                     .success(res.getSuccess())
-                    .reason(res.getError().getReason())
+                    .message(res.getMessage())
                     .build();
         } catch (Exception e) {
             if (e.getMessage().contains(Constant.DEADLINE_EXCEEDED)) {
-                return UcsResult.builder().success(false).reason(Constant.TIMEOUT_MSG).build();
+                return UcsResult.builder().success(false).message(Constant.TIMEOUT_MSG).build();
             }
             e.printStackTrace();
-            return UcsResult.builder().success(false).reason(Constant.UNKNOWN_MSG).build();
+            return UcsResult.builder().success(false).message(Constant.UNKNOWN_MSG).build();
         } finally {
             this.channel.shutdown();
         }
     }
 
-    private UcsResult authorization(UcsPb.AuthorizationRequest req) {
+    private UcsResult<PermitResult> authorization(UcsPb.AuthorizationRequest req) {
         this.prepare();
         try {
             UcsPb.Result res = blockingStub
                     .withCallCredentials(jwtCredential)
                     .withDeadlineAfter(timeout, TimeUnit.SECONDS)
                     .authorization(req);
-            return UcsResult.builder()
+            return UcsResult.<PermitResult>builder()
                     .success(res.getSuccess())
-                    .reason(res.getError().getReason())
+                    .message(res.getMessage())
+                    .result(PermitResult.builder().permit(res.getSuccess()).build())
                     .build();
         } catch (Exception e) {
             if (e.getMessage().contains(Constant.DEADLINE_EXCEEDED)) {
-                return UcsResult.builder().success(false).reason(Constant.TIMEOUT_MSG).build();
+                return UcsResult.<PermitResult>builder()
+                        .success(false)
+                        .message(Constant.TIMEOUT_MSG)
+                        .result(PermitResult.builder().permit(false).build())
+                        .build();
             }
             e.printStackTrace();
-            return UcsResult.builder().success(false).reason(Constant.UNKNOWN_MSG).build();
+            return UcsResult.<PermitResult>builder()
+                    .success(false)
+                    .message(Constant.UNKNOWN_MSG)
+                    .result(PermitResult.builder().permit(false).build())
+                    .build();
         } finally {
             channel.shutdown();
         }

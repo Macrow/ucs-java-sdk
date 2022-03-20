@@ -51,19 +51,19 @@ public class HttpClient implements Client {
     }
 
     @Override
-    public UcsResult ValidateJwt() {
+    public UcsResult<Object> ValidateJwt() {
         return request(Constant.ValidateJwtURL, Method.GET, null);
     }
 
     @Override
-    public UcsResult ValidatePermOperationByCode(String code) {
+    public UcsResult<PermitResult> ValidatePermOperationByCode(String code) {
         Map<String, Object> formData = new HashMap<>();
         formData.put("code", code);
         return request(Constant.ValidatePermOperationByCodeURL, Method.POST, formData);
     }
 
     @Override
-    public UcsResult ValidatePermAction(String service, String path, String method) {
+    public UcsResult<PermitResult> ValidatePermAction(String service, String path, String method) {
         Map<String, Object> formData = new HashMap<>();
         formData.put("service", service);
         formData.put("path", path);
@@ -72,16 +72,24 @@ public class HttpClient implements Client {
     }
 
     @Override
-    public UcsResult ValidatePermOrgById(String orgId) {
+    public UcsResult<PermitResult> ValidatePermOrgById(String orgId) {
         Map<String, Object> formData = new HashMap<>();
         formData.put("id", orgId);
         return request(Constant.ValidatePermOrgByIdURL, Method.POST, formData);
     }
 
-    private UcsResult request(String url, Method method, Map<String, Object> formData) {
+    @Override
+    public UcsResult<RenewTokenResult> RenewToken() {
+        Map<String, Object> formData = new HashMap<>();
+        formData.put("token", token);
+        return request(Constant.RenewTokenURL, Method.POST, formData);
+    }
+
+    private <T> UcsResult<T> request(String url, Method method, Map<String, Object> formData) {
         prepare();
         boolean success = false;
-        String reason = Constant.UNKNOWN_MSG;
+        String message = Constant.UNKNOWN_MSG;
+        T res = null;
         try {
             HttpRequest req;
             switch (method) {
@@ -118,24 +126,35 @@ public class HttpClient implements Client {
                     if (result.getResult().isEmpty()) {
                         success = true;
                     } else {
-                        HttpResult.PermitResult permit = result.getResult().toBean(HttpResult.PermitResult.class);
-                        if (permit.getPermit()) {
-                            success = true;
-                        } else {
-                            reason = Constant.UNAUTHORIZED_MSG;
+                        if (result.getResult().get("permit") != null) {
+                            PermitResult permitResult = result.getResult().toBean(PermitResult.class);
+                            if (permitResult.getPermit()) {
+                                success = true;
+                            } else {
+                                message = Constant.UNAUTHORIZED_MSG;
+                            }
+                            res = (T) permitResult;
+                        }
+                        if (result.getResult().get("token") != null) {
+                            RenewTokenResult renewTokenResult = result.getResult().toBean(RenewTokenResult.class);
+                            res = (T) renewTokenResult;
                         }
                     }
                 }
                 if (!result.getMessage().isEmpty()) {
-                    reason = result.getMessage();
+                    message = result.getMessage();
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
+            success = false;
+            message = Constant.UNKNOWN_MSG;
+            res = null;
         }
-        return UcsResult.builder()
+        return UcsResult.<T>builder()
                 .success(success)
-                .reason(success ? "" : reason)
+                .message(success ? "" : message)
+                .result(res)
                 .build();
     }
 

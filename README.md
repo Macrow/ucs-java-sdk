@@ -20,7 +20,7 @@
 dependency>
     <groupId>com.github.Macrow</groupId>
     <artifactId>ucs-java-sdk</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
 </dependency>
 ```
 
@@ -38,22 +38,27 @@ Client client = new RpcClient("your.domain.com:port"); // Rpc方式
 client.SetToken(token)
 ```
 
+### 如果令牌过期了，重新获取令牌
+```
+Result res = client.RenewToken();
+```
+
 ### UCS服务端验证Jwt
 ```
-ValidateResult res = client.ValidateJwt();
+Result res = client.ValidateJwt();
 ```
 
 ### UCS服务端验证操作码
 ```
-ValidateResult res = client.ValidatePermOperationByCode("UCS_O_CODE");
+Result res = client.ValidatePermOperationByCode("UCS_O_CODE");
 ```
 
 ### UCS服务端验证接口
 ```
-ValidateResult res = client.ValidatePermAction("ucs", "/api/v1/ucs/users", "get");
+Result res = client.ValidatePermAction("ucs", "/api/v1/ucs/users", "get");
 ```
 
 ### UCS服务端验证用户是否拥有机构权限
 ```
-ValidateResult res = client.ValidatePermOrgById("org_id_is_here");
+Result res = client.ValidatePermOrgById("org_id_is_here");
 ```

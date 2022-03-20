@@ -10,7 +10,8 @@ import lombok.*;
 @Setter
 @Builder
 @AllArgsConstructor
-public class UcsResult {
+public class UcsResult<T> {
     private Boolean success;
-    private String reason;
+    private String message;
+    private T result;
 }

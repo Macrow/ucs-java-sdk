@@ -77,6 +77,37 @@ public final class AuthServiceGrpc {
     return getAuthorizationMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<UcsPb.RenewTokenRequest,
+      UcsPb.RenewTokenResult> getRenewTokenMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "RenewToken",
+      requestType = UcsPb.RenewTokenRequest.class,
+      responseType = UcsPb.RenewTokenResult.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UcsPb.RenewTokenRequest,
+      UcsPb.RenewTokenResult> getRenewTokenMethod() {
+    io.grpc.MethodDescriptor<UcsPb.RenewTokenRequest, UcsPb.RenewTokenResult> getRenewTokenMethod;
+    if ((getRenewTokenMethod = AuthServiceGrpc.getRenewTokenMethod) == null) {
+      synchronized (AuthServiceGrpc.class) {
+        if ((getRenewTokenMethod = AuthServiceGrpc.getRenewTokenMethod) == null) {
+          AuthServiceGrpc.getRenewTokenMethod = getRenewTokenMethod =
+              io.grpc.MethodDescriptor.<UcsPb.RenewTokenRequest, UcsPb.RenewTokenResult>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "RenewToken"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  UcsPb.RenewTokenRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  UcsPb.RenewTokenResult.getDefaultInstance()))
+              .setSchemaDescriptor(new AuthServiceMethodDescriptorSupplier("RenewToken"))
+              .build();
+        }
+      }
+    }
+    return getRenewTokenMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -139,6 +170,13 @@ public final class AuthServiceGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAuthorizationMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void renewToken(UcsPb.RenewTokenRequest request,
+                           io.grpc.stub.StreamObserver<UcsPb.RenewTokenResult> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRenewTokenMethod(), responseObserver);
+    }
+
     @Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -155,6 +193,13 @@ public final class AuthServiceGrpc {
                 UcsPb.AuthorizationRequest,
                 UcsPb.Result>(
                   this, METHODID_AUTHORIZATION)))
+          .addMethod(
+            getRenewTokenMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                UcsPb.RenewTokenRequest,
+                UcsPb.RenewTokenResult>(
+                  this, METHODID_RENEW_TOKEN)))
           .build();
     }
   }
@@ -188,6 +233,14 @@ public final class AuthServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getAuthorizationMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void renewToken(UcsPb.RenewTokenRequest request,
+                           io.grpc.stub.StreamObserver<UcsPb.RenewTokenResult> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getRenewTokenMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -216,6 +269,13 @@ public final class AuthServiceGrpc {
     public UcsPb.Result authorization(UcsPb.AuthorizationRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getAuthorizationMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public UcsPb.RenewTokenResult renewToken(UcsPb.RenewTokenRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRenewTokenMethod(), getCallOptions(), request);
     }
   }
 
@@ -248,10 +308,19 @@ public final class AuthServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getAuthorizationMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<UcsPb.RenewTokenResult> renewToken(
+        UcsPb.RenewTokenRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getRenewTokenMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_AUTHENTICATION = 0;
   private static final int METHODID_AUTHORIZATION = 1;
+  private static final int METHODID_RENEW_TOKEN = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -277,6 +346,10 @@ public final class AuthServiceGrpc {
         case METHODID_AUTHORIZATION:
           serviceImpl.authorization((UcsPb.AuthorizationRequest) request,
               (io.grpc.stub.StreamObserver<UcsPb.Result>) responseObserver);
+          break;
+        case METHODID_RENEW_TOKEN:
+          serviceImpl.renewToken((UcsPb.RenewTokenRequest) request,
+              (io.grpc.stub.StreamObserver<UcsPb.RenewTokenResult>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -341,6 +414,7 @@ public final class AuthServiceGrpc {
               .setSchemaDescriptor(new AuthServiceFileDescriptorSupplier())
               .addMethod(getAuthenticationMethod())
               .addMethod(getAuthorizationMethod())
+              .addMethod(getRenewTokenMethod())
               .build();
         }
       }

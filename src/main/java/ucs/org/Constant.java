@@ -20,6 +20,7 @@ interface Constant {
     String ValidatePermOperationByCodeURL = "/api/v1/ucs/current/check-operation";
     String ValidatePermActionURL = "/api/v1/ucs/current/check-action";
     String ValidatePermOrgByIdURL = "/api/v1/ucs/current/check-org";
+    String RenewTokenURL = "/api/v1/ucs/public/renew-token";
 
     int DEFAULT_TIMEOUT_IN_SECONDS = 3;
     String DEADLINE_EXCEEDED = "DEADLINE_EXCEEDED";
