@@ -78,6 +78,25 @@ public class HttpClient implements Client {
         return request(Constant.ValidatePermOrgByIdURL, Method.POST, formData);
     }
 
+    @Override
+    public UcsResult<PermitResult> ValidatePermActionWithOrgId(String service, String path, String method, String orgId) {
+        Map<String, Object> formData = new HashMap<>();
+        formData.put("service", service);
+        formData.put("path", path);
+        formData.put("method", method);
+        formData.put("orgId", orgId);
+        return request(Constant.ValidatePermActionWithOrgIdURL, Method.POST, formData);
+    }
+
+    @Override
+    public UcsResult<OrgIdsResult> QueryOrgIdsByAction(String service, String path, String method) {
+        Map<String, Object> formData = new HashMap<>();
+        formData.put("service", service);
+        formData.put("path", path);
+        formData.put("method", method);
+        return request(Constant.QueryOrgIdsByActionURL, Method.POST, formData);
+    }
+
     private <T> UcsResult<T> request(String url, Method method, Map<String, Object> formData) {
         prepare();
         boolean success = false;
@@ -127,6 +146,11 @@ public class HttpClient implements Client {
                                 message = Constant.UNAUTHORIZED_MSG;
                             }
                             res = (T) permitResult;
+                        }
+                        if (result.getResult().get("orgPermissionType") != null) {
+                            OrgIdsResult orgIdsResult = result.getResult().toBean(OrgIdsResult.class);
+                            message = "";
+                            res = (T) orgIdsResult;
                         }
                     }
                 }

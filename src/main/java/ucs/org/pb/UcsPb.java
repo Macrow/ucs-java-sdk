@@ -485,6 +485,36 @@ public final class UcsPb {
     com.google.protobuf.ByteString
         getOrgIdBytes();
 
+    /**
+     * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+     * @return Whether the actionWithOrgId field is set.
+     */
+    boolean hasActionWithOrgId();
+    /**
+     * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+     * @return The actionWithOrgId.
+     */
+    ActionWithOrgId getActionWithOrgId();
+    /**
+     * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+     */
+    ActionWithOrgIdOrBuilder getActionWithOrgIdOrBuilder();
+
+    /**
+     * <code>.pb.Action orgIdsByAction = 5;</code>
+     * @return Whether the orgIdsByAction field is set.
+     */
+    boolean hasOrgIdsByAction();
+    /**
+     * <code>.pb.Action orgIdsByAction = 5;</code>
+     * @return The orgIdsByAction.
+     */
+    Action getOrgIdsByAction();
+    /**
+     * <code>.pb.Action orgIdsByAction = 5;</code>
+     */
+    ActionOrBuilder getOrgIdsByActionOrBuilder();
+
     public AuthorizationRequest.PayloadCase getPayloadCase();
   }
   /**
@@ -558,6 +588,34 @@ public final class UcsPb {
               payload_ = s;
               break;
             }
+            case 34: {
+              ActionWithOrgId.Builder subBuilder = null;
+              if (payloadCase_ == 4) {
+                subBuilder = ((ActionWithOrgId) payload_).toBuilder();
+              }
+              payload_ =
+                  input.readMessage(ActionWithOrgId.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((ActionWithOrgId) payload_);
+                payload_ = subBuilder.buildPartial();
+              }
+              payloadCase_ = 4;
+              break;
+            }
+            case 42: {
+              Action.Builder subBuilder = null;
+              if (payloadCase_ == 5) {
+                subBuilder = ((Action) payload_).toBuilder();
+              }
+              payload_ =
+                  input.readMessage(Action.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((Action) payload_);
+                payload_ = subBuilder.buildPartial();
+              }
+              payloadCase_ = 5;
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -598,6 +656,8 @@ public final class UcsPb {
       OPERATIONCODE(1),
       ACTION(2),
       ORGID(3),
+      ACTIONWITHORGID(4),
+      ORGIDSBYACTION(5),
       PAYLOAD_NOT_SET(0);
       private final int value;
       private PayloadCase(int value) {
@@ -618,6 +678,8 @@ public final class UcsPb {
           case 1: return OPERATIONCODE;
           case 2: return ACTION;
           case 3: return ORGID;
+          case 4: return ACTIONWITHORGID;
+          case 5: return ORGIDSBYACTION;
           case 0: return PAYLOAD_NOT_SET;
           default: return null;
         }
@@ -768,6 +830,68 @@ public final class UcsPb {
       }
     }
 
+    public static final int ACTIONWITHORGID_FIELD_NUMBER = 4;
+    /**
+     * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+     * @return Whether the actionWithOrgId field is set.
+     */
+    @Override
+    public boolean hasActionWithOrgId() {
+      return payloadCase_ == 4;
+    }
+    /**
+     * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+     * @return The actionWithOrgId.
+     */
+    @Override
+    public ActionWithOrgId getActionWithOrgId() {
+      if (payloadCase_ == 4) {
+         return (ActionWithOrgId) payload_;
+      }
+      return ActionWithOrgId.getDefaultInstance();
+    }
+    /**
+     * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+     */
+    @Override
+    public ActionWithOrgIdOrBuilder getActionWithOrgIdOrBuilder() {
+      if (payloadCase_ == 4) {
+         return (ActionWithOrgId) payload_;
+      }
+      return ActionWithOrgId.getDefaultInstance();
+    }
+
+    public static final int ORGIDSBYACTION_FIELD_NUMBER = 5;
+    /**
+     * <code>.pb.Action orgIdsByAction = 5;</code>
+     * @return Whether the orgIdsByAction field is set.
+     */
+    @Override
+    public boolean hasOrgIdsByAction() {
+      return payloadCase_ == 5;
+    }
+    /**
+     * <code>.pb.Action orgIdsByAction = 5;</code>
+     * @return The orgIdsByAction.
+     */
+    @Override
+    public Action getOrgIdsByAction() {
+      if (payloadCase_ == 5) {
+         return (Action) payload_;
+      }
+      return Action.getDefaultInstance();
+    }
+    /**
+     * <code>.pb.Action orgIdsByAction = 5;</code>
+     */
+    @Override
+    public ActionOrBuilder getOrgIdsByActionOrBuilder() {
+      if (payloadCase_ == 5) {
+         return (Action) payload_;
+      }
+      return Action.getDefaultInstance();
+    }
+
     private byte memoizedIsInitialized = -1;
     @Override
     public final boolean isInitialized() {
@@ -791,6 +915,12 @@ public final class UcsPb {
       if (payloadCase_ == 3) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, payload_);
       }
+      if (payloadCase_ == 4) {
+        output.writeMessage(4, (ActionWithOrgId) payload_);
+      }
+      if (payloadCase_ == 5) {
+        output.writeMessage(5, (Action) payload_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -809,6 +939,14 @@ public final class UcsPb {
       }
       if (payloadCase_ == 3) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, payload_);
+      }
+      if (payloadCase_ == 4) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, (ActionWithOrgId) payload_);
+      }
+      if (payloadCase_ == 5) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, (Action) payload_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -839,6 +977,14 @@ public final class UcsPb {
           if (!getOrgId()
               .equals(other.getOrgId())) return false;
           break;
+        case 4:
+          if (!getActionWithOrgId()
+              .equals(other.getActionWithOrgId())) return false;
+          break;
+        case 5:
+          if (!getOrgIdsByAction()
+              .equals(other.getOrgIdsByAction())) return false;
+          break;
         case 0:
         default:
       }
@@ -865,6 +1011,14 @@ public final class UcsPb {
         case 3:
           hash = (37 * hash) + ORGID_FIELD_NUMBER;
           hash = (53 * hash) + getOrgId().hashCode();
+          break;
+        case 4:
+          hash = (37 * hash) + ACTIONWITHORGID_FIELD_NUMBER;
+          hash = (53 * hash) + getActionWithOrgId().hashCode();
+          break;
+        case 5:
+          hash = (37 * hash) + ORGIDSBYACTION_FIELD_NUMBER;
+          hash = (53 * hash) + getOrgIdsByAction().hashCode();
           break;
         case 0:
         default:
@@ -1043,6 +1197,20 @@ public final class UcsPb {
         if (payloadCase_ == 3) {
           result.payload_ = payload_;
         }
+        if (payloadCase_ == 4) {
+          if (actionWithOrgIdBuilder_ == null) {
+            result.payload_ = payload_;
+          } else {
+            result.payload_ = actionWithOrgIdBuilder_.build();
+          }
+        }
+        if (payloadCase_ == 5) {
+          if (orgIdsByActionBuilder_ == null) {
+            result.payload_ = payload_;
+          } else {
+            result.payload_ = orgIdsByActionBuilder_.build();
+          }
+        }
         result.payloadCase_ = payloadCase_;
         onBuilt();
         return result;
@@ -1107,6 +1275,14 @@ public final class UcsPb {
             payloadCase_ = 3;
             payload_ = other.payload_;
             onChanged();
+            break;
+          }
+          case ACTIONWITHORGID: {
+            mergeActionWithOrgId(other.getActionWithOrgId());
+            break;
+          }
+          case ORGIDSBYACTION: {
+            mergeOrgIdsByAction(other.getOrgIdsByAction());
             break;
           }
           case PAYLOAD_NOT_SET: {
@@ -1490,6 +1666,288 @@ public final class UcsPb {
         payload_ = value;
         onChanged();
         return this;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          ActionWithOrgId, ActionWithOrgId.Builder, ActionWithOrgIdOrBuilder> actionWithOrgIdBuilder_;
+      /**
+       * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+       * @return Whether the actionWithOrgId field is set.
+       */
+      @Override
+      public boolean hasActionWithOrgId() {
+        return payloadCase_ == 4;
+      }
+      /**
+       * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+       * @return The actionWithOrgId.
+       */
+      @Override
+      public ActionWithOrgId getActionWithOrgId() {
+        if (actionWithOrgIdBuilder_ == null) {
+          if (payloadCase_ == 4) {
+            return (ActionWithOrgId) payload_;
+          }
+          return ActionWithOrgId.getDefaultInstance();
+        } else {
+          if (payloadCase_ == 4) {
+            return actionWithOrgIdBuilder_.getMessage();
+          }
+          return ActionWithOrgId.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+       */
+      public Builder setActionWithOrgId(ActionWithOrgId value) {
+        if (actionWithOrgIdBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          payload_ = value;
+          onChanged();
+        } else {
+          actionWithOrgIdBuilder_.setMessage(value);
+        }
+        payloadCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+       */
+      public Builder setActionWithOrgId(
+          ActionWithOrgId.Builder builderForValue) {
+        if (actionWithOrgIdBuilder_ == null) {
+          payload_ = builderForValue.build();
+          onChanged();
+        } else {
+          actionWithOrgIdBuilder_.setMessage(builderForValue.build());
+        }
+        payloadCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+       */
+      public Builder mergeActionWithOrgId(ActionWithOrgId value) {
+        if (actionWithOrgIdBuilder_ == null) {
+          if (payloadCase_ == 4 &&
+              payload_ != ActionWithOrgId.getDefaultInstance()) {
+            payload_ = ActionWithOrgId.newBuilder((ActionWithOrgId) payload_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            payload_ = value;
+          }
+          onChanged();
+        } else {
+          if (payloadCase_ == 4) {
+            actionWithOrgIdBuilder_.mergeFrom(value);
+          }
+          actionWithOrgIdBuilder_.setMessage(value);
+        }
+        payloadCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+       */
+      public Builder clearActionWithOrgId() {
+        if (actionWithOrgIdBuilder_ == null) {
+          if (payloadCase_ == 4) {
+            payloadCase_ = 0;
+            payload_ = null;
+            onChanged();
+          }
+        } else {
+          if (payloadCase_ == 4) {
+            payloadCase_ = 0;
+            payload_ = null;
+          }
+          actionWithOrgIdBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+       */
+      public ActionWithOrgId.Builder getActionWithOrgIdBuilder() {
+        return getActionWithOrgIdFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+       */
+      @Override
+      public ActionWithOrgIdOrBuilder getActionWithOrgIdOrBuilder() {
+        if ((payloadCase_ == 4) && (actionWithOrgIdBuilder_ != null)) {
+          return actionWithOrgIdBuilder_.getMessageOrBuilder();
+        } else {
+          if (payloadCase_ == 4) {
+            return (ActionWithOrgId) payload_;
+          }
+          return ActionWithOrgId.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.pb.ActionWithOrgId actionWithOrgId = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          ActionWithOrgId, ActionWithOrgId.Builder, ActionWithOrgIdOrBuilder>
+          getActionWithOrgIdFieldBuilder() {
+        if (actionWithOrgIdBuilder_ == null) {
+          if (!(payloadCase_ == 4)) {
+            payload_ = ActionWithOrgId.getDefaultInstance();
+          }
+          actionWithOrgIdBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              ActionWithOrgId, ActionWithOrgId.Builder, ActionWithOrgIdOrBuilder>(
+                  (ActionWithOrgId) payload_,
+                  getParentForChildren(),
+                  isClean());
+          payload_ = null;
+        }
+        payloadCase_ = 4;
+        onChanged();;
+        return actionWithOrgIdBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          Action, Action.Builder, ActionOrBuilder> orgIdsByActionBuilder_;
+      /**
+       * <code>.pb.Action orgIdsByAction = 5;</code>
+       * @return Whether the orgIdsByAction field is set.
+       */
+      @Override
+      public boolean hasOrgIdsByAction() {
+        return payloadCase_ == 5;
+      }
+      /**
+       * <code>.pb.Action orgIdsByAction = 5;</code>
+       * @return The orgIdsByAction.
+       */
+      @Override
+      public Action getOrgIdsByAction() {
+        if (orgIdsByActionBuilder_ == null) {
+          if (payloadCase_ == 5) {
+            return (Action) payload_;
+          }
+          return Action.getDefaultInstance();
+        } else {
+          if (payloadCase_ == 5) {
+            return orgIdsByActionBuilder_.getMessage();
+          }
+          return Action.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.pb.Action orgIdsByAction = 5;</code>
+       */
+      public Builder setOrgIdsByAction(Action value) {
+        if (orgIdsByActionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          payload_ = value;
+          onChanged();
+        } else {
+          orgIdsByActionBuilder_.setMessage(value);
+        }
+        payloadCase_ = 5;
+        return this;
+      }
+      /**
+       * <code>.pb.Action orgIdsByAction = 5;</code>
+       */
+      public Builder setOrgIdsByAction(
+          Action.Builder builderForValue) {
+        if (orgIdsByActionBuilder_ == null) {
+          payload_ = builderForValue.build();
+          onChanged();
+        } else {
+          orgIdsByActionBuilder_.setMessage(builderForValue.build());
+        }
+        payloadCase_ = 5;
+        return this;
+      }
+      /**
+       * <code>.pb.Action orgIdsByAction = 5;</code>
+       */
+      public Builder mergeOrgIdsByAction(Action value) {
+        if (orgIdsByActionBuilder_ == null) {
+          if (payloadCase_ == 5 &&
+              payload_ != Action.getDefaultInstance()) {
+            payload_ = Action.newBuilder((Action) payload_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            payload_ = value;
+          }
+          onChanged();
+        } else {
+          if (payloadCase_ == 5) {
+            orgIdsByActionBuilder_.mergeFrom(value);
+          }
+          orgIdsByActionBuilder_.setMessage(value);
+        }
+        payloadCase_ = 5;
+        return this;
+      }
+      /**
+       * <code>.pb.Action orgIdsByAction = 5;</code>
+       */
+      public Builder clearOrgIdsByAction() {
+        if (orgIdsByActionBuilder_ == null) {
+          if (payloadCase_ == 5) {
+            payloadCase_ = 0;
+            payload_ = null;
+            onChanged();
+          }
+        } else {
+          if (payloadCase_ == 5) {
+            payloadCase_ = 0;
+            payload_ = null;
+          }
+          orgIdsByActionBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.pb.Action orgIdsByAction = 5;</code>
+       */
+      public Action.Builder getOrgIdsByActionBuilder() {
+        return getOrgIdsByActionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.pb.Action orgIdsByAction = 5;</code>
+       */
+      @Override
+      public ActionOrBuilder getOrgIdsByActionOrBuilder() {
+        if ((payloadCase_ == 5) && (orgIdsByActionBuilder_ != null)) {
+          return orgIdsByActionBuilder_.getMessageOrBuilder();
+        } else {
+          if (payloadCase_ == 5) {
+            return (Action) payload_;
+          }
+          return Action.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.pb.Action orgIdsByAction = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          Action, Action.Builder, ActionOrBuilder>
+          getOrgIdsByActionFieldBuilder() {
+        if (orgIdsByActionBuilder_ == null) {
+          if (!(payloadCase_ == 5)) {
+            payload_ = Action.getDefaultInstance();
+          }
+          orgIdsByActionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              Action, Action.Builder, ActionOrBuilder>(
+                  (Action) payload_,
+                  getParentForChildren(),
+                  isClean());
+          payload_ = null;
+        }
+        payloadCase_ = 5;
+        onChanged();;
+        return orgIdsByActionBuilder_;
       }
       @Override
       public final Builder setUnknownFields(
@@ -2412,6 +2870,777 @@ public final class UcsPb {
 
   }
 
+  public interface ActionWithOrgIdOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pb.ActionWithOrgId)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.pb.Action action = 1;</code>
+     * @return Whether the action field is set.
+     */
+    boolean hasAction();
+    /**
+     * <code>.pb.Action action = 1;</code>
+     * @return The action.
+     */
+    Action getAction();
+    /**
+     * <code>.pb.Action action = 1;</code>
+     */
+    ActionOrBuilder getActionOrBuilder();
+
+    /**
+     * <code>string orgId = 2;</code>
+     * @return The orgId.
+     */
+    String getOrgId();
+    /**
+     * <code>string orgId = 2;</code>
+     * @return The bytes for orgId.
+     */
+    com.google.protobuf.ByteString
+        getOrgIdBytes();
+  }
+  /**
+   * Protobuf type {@code pb.ActionWithOrgId}
+   */
+  public static final class ActionWithOrgId extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:pb.ActionWithOrgId)
+      ActionWithOrgIdOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ActionWithOrgId.newBuilder() to construct.
+    private ActionWithOrgId(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ActionWithOrgId() {
+      orgId_ = "";
+    }
+
+    @Override
+    @SuppressWarnings({"unused"})
+    protected Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ActionWithOrgId();
+    }
+
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ActionWithOrgId(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              Action.Builder subBuilder = null;
+              if (action_ != null) {
+                subBuilder = action_.toBuilder();
+              }
+              action_ = input.readMessage(Action.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(action_);
+                action_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              String s = input.readStringRequireUtf8();
+
+              orgId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return UcsPb.internal_static_pb_ActionWithOrgId_descriptor;
+    }
+
+    @Override
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return UcsPb.internal_static_pb_ActionWithOrgId_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              ActionWithOrgId.class, Builder.class);
+    }
+
+    public static final int ACTION_FIELD_NUMBER = 1;
+    private Action action_;
+    /**
+     * <code>.pb.Action action = 1;</code>
+     * @return Whether the action field is set.
+     */
+    @Override
+    public boolean hasAction() {
+      return action_ != null;
+    }
+    /**
+     * <code>.pb.Action action = 1;</code>
+     * @return The action.
+     */
+    @Override
+    public Action getAction() {
+      return action_ == null ? Action.getDefaultInstance() : action_;
+    }
+    /**
+     * <code>.pb.Action action = 1;</code>
+     */
+    @Override
+    public ActionOrBuilder getActionOrBuilder() {
+      return getAction();
+    }
+
+    public static final int ORGID_FIELD_NUMBER = 2;
+    private volatile Object orgId_;
+    /**
+     * <code>string orgId = 2;</code>
+     * @return The orgId.
+     */
+    @Override
+    public String getOrgId() {
+      Object ref = orgId_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        orgId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string orgId = 2;</code>
+     * @return The bytes for orgId.
+     */
+    @Override
+    public com.google.protobuf.ByteString
+        getOrgIdBytes() {
+      Object ref = orgId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        orgId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (action_ != null) {
+        output.writeMessage(1, getAction());
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(orgId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, orgId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (action_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getAction());
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(orgId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, orgId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof ActionWithOrgId)) {
+        return super.equals(obj);
+      }
+      ActionWithOrgId other = (ActionWithOrgId) obj;
+
+      if (hasAction() != other.hasAction()) return false;
+      if (hasAction()) {
+        if (!getAction()
+            .equals(other.getAction())) return false;
+      }
+      if (!getOrgId()
+          .equals(other.getOrgId())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasAction()) {
+        hash = (37 * hash) + ACTION_FIELD_NUMBER;
+        hash = (53 * hash) + getAction().hashCode();
+      }
+      hash = (37 * hash) + ORGID_FIELD_NUMBER;
+      hash = (53 * hash) + getOrgId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static ActionWithOrgId parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ActionWithOrgId parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ActionWithOrgId parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ActionWithOrgId parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ActionWithOrgId parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ActionWithOrgId parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ActionWithOrgId parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ActionWithOrgId parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ActionWithOrgId parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static ActionWithOrgId parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ActionWithOrgId parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ActionWithOrgId parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(ActionWithOrgId prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code pb.ActionWithOrgId}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:pb.ActionWithOrgId)
+        ActionWithOrgIdOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return UcsPb.internal_static_pb_ActionWithOrgId_descriptor;
+      }
+
+      @Override
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return UcsPb.internal_static_pb_ActionWithOrgId_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                ActionWithOrgId.class, Builder.class);
+      }
+
+      // Construct using ucs.org.pb.UcsPb.ActionWithOrgId.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @Override
+      public Builder clear() {
+        super.clear();
+        if (actionBuilder_ == null) {
+          action_ = null;
+        } else {
+          action_ = null;
+          actionBuilder_ = null;
+        }
+        orgId_ = "";
+
+        return this;
+      }
+
+      @Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return UcsPb.internal_static_pb_ActionWithOrgId_descriptor;
+      }
+
+      @Override
+      public ActionWithOrgId getDefaultInstanceForType() {
+        return ActionWithOrgId.getDefaultInstance();
+      }
+
+      @Override
+      public ActionWithOrgId build() {
+        ActionWithOrgId result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @Override
+      public ActionWithOrgId buildPartial() {
+        ActionWithOrgId result = new ActionWithOrgId(this);
+        if (actionBuilder_ == null) {
+          result.action_ = action_;
+        } else {
+          result.action_ = actionBuilder_.build();
+        }
+        result.orgId_ = orgId_;
+        onBuilt();
+        return result;
+      }
+
+      @Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return super.setField(field, value);
+      }
+      @Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof ActionWithOrgId) {
+          return mergeFrom((ActionWithOrgId)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(ActionWithOrgId other) {
+        if (other == ActionWithOrgId.getDefaultInstance()) return this;
+        if (other.hasAction()) {
+          mergeAction(other.getAction());
+        }
+        if (!other.getOrgId().isEmpty()) {
+          orgId_ = other.orgId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        ActionWithOrgId parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (ActionWithOrgId) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private Action action_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          Action, Action.Builder, ActionOrBuilder> actionBuilder_;
+      /**
+       * <code>.pb.Action action = 1;</code>
+       * @return Whether the action field is set.
+       */
+      public boolean hasAction() {
+        return actionBuilder_ != null || action_ != null;
+      }
+      /**
+       * <code>.pb.Action action = 1;</code>
+       * @return The action.
+       */
+      public Action getAction() {
+        if (actionBuilder_ == null) {
+          return action_ == null ? Action.getDefaultInstance() : action_;
+        } else {
+          return actionBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.pb.Action action = 1;</code>
+       */
+      public Builder setAction(Action value) {
+        if (actionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          action_ = value;
+          onChanged();
+        } else {
+          actionBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.pb.Action action = 1;</code>
+       */
+      public Builder setAction(
+          Action.Builder builderForValue) {
+        if (actionBuilder_ == null) {
+          action_ = builderForValue.build();
+          onChanged();
+        } else {
+          actionBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.pb.Action action = 1;</code>
+       */
+      public Builder mergeAction(Action value) {
+        if (actionBuilder_ == null) {
+          if (action_ != null) {
+            action_ =
+              Action.newBuilder(action_).mergeFrom(value).buildPartial();
+          } else {
+            action_ = value;
+          }
+          onChanged();
+        } else {
+          actionBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.pb.Action action = 1;</code>
+       */
+      public Builder clearAction() {
+        if (actionBuilder_ == null) {
+          action_ = null;
+          onChanged();
+        } else {
+          action_ = null;
+          actionBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.pb.Action action = 1;</code>
+       */
+      public Action.Builder getActionBuilder() {
+        
+        onChanged();
+        return getActionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.pb.Action action = 1;</code>
+       */
+      public ActionOrBuilder getActionOrBuilder() {
+        if (actionBuilder_ != null) {
+          return actionBuilder_.getMessageOrBuilder();
+        } else {
+          return action_ == null ?
+              Action.getDefaultInstance() : action_;
+        }
+      }
+      /**
+       * <code>.pb.Action action = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          Action, Action.Builder, ActionOrBuilder>
+          getActionFieldBuilder() {
+        if (actionBuilder_ == null) {
+          actionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              Action, Action.Builder, ActionOrBuilder>(
+                  getAction(),
+                  getParentForChildren(),
+                  isClean());
+          action_ = null;
+        }
+        return actionBuilder_;
+      }
+
+      private Object orgId_ = "";
+      /**
+       * <code>string orgId = 2;</code>
+       * @return The orgId.
+       */
+      public String getOrgId() {
+        Object ref = orgId_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          orgId_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>string orgId = 2;</code>
+       * @return The bytes for orgId.
+       */
+      public com.google.protobuf.ByteString
+          getOrgIdBytes() {
+        Object ref = orgId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          orgId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string orgId = 2;</code>
+       * @param value The orgId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrgId(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        orgId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string orgId = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOrgId() {
+        
+        orgId_ = getDefaultInstance().getOrgId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string orgId = 2;</code>
+       * @param value The bytes for orgId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrgIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        orgId_ = value;
+        onChanged();
+        return this;
+      }
+      @Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:pb.ActionWithOrgId)
+    }
+
+    // @@protoc_insertion_point(class_scope:pb.ActionWithOrgId)
+    private static final ActionWithOrgId DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new ActionWithOrgId();
+    }
+
+    public static ActionWithOrgId getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ActionWithOrgId>
+        PARSER = new com.google.protobuf.AbstractParser<ActionWithOrgId>() {
+      @Override
+      public ActionWithOrgId parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ActionWithOrgId(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ActionWithOrgId> parser() {
+      return PARSER;
+    }
+
+    @Override
+    public com.google.protobuf.Parser<ActionWithOrgId> getParserForType() {
+      return PARSER;
+    }
+
+    @Override
+    public ActionWithOrgId getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ResultOrBuilder extends
       // @@protoc_insertion_point(interface_extends:pb.Result)
       com.google.protobuf.MessageOrBuilder {
@@ -2433,6 +3662,21 @@ public final class UcsPb {
      */
     com.google.protobuf.ByteString
         getMessageBytes();
+
+    /**
+     * <code>.pb.OrgIdsResult orgIds = 3;</code>
+     * @return Whether the orgIds field is set.
+     */
+    boolean hasOrgIds();
+    /**
+     * <code>.pb.OrgIdsResult orgIds = 3;</code>
+     * @return The orgIds.
+     */
+    OrgIdsResult getOrgIds();
+    /**
+     * <code>.pb.OrgIdsResult orgIds = 3;</code>
+     */
+    OrgIdsResultOrBuilder getOrgIdsOrBuilder();
   }
   /**
    * Protobuf type {@code pb.Result}
@@ -2489,6 +3733,19 @@ public final class UcsPb {
               String s = input.readStringRequireUtf8();
 
               message_ = s;
+              break;
+            }
+            case 26: {
+              OrgIdsResult.Builder subBuilder = null;
+              if (orgIds_ != null) {
+                subBuilder = orgIds_.toBuilder();
+              }
+              orgIds_ = input.readMessage(OrgIdsResult.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(orgIds_);
+                orgIds_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -2572,6 +3829,32 @@ public final class UcsPb {
       }
     }
 
+    public static final int ORGIDS_FIELD_NUMBER = 3;
+    private OrgIdsResult orgIds_;
+    /**
+     * <code>.pb.OrgIdsResult orgIds = 3;</code>
+     * @return Whether the orgIds field is set.
+     */
+    @Override
+    public boolean hasOrgIds() {
+      return orgIds_ != null;
+    }
+    /**
+     * <code>.pb.OrgIdsResult orgIds = 3;</code>
+     * @return The orgIds.
+     */
+    @Override
+    public OrgIdsResult getOrgIds() {
+      return orgIds_ == null ? OrgIdsResult.getDefaultInstance() : orgIds_;
+    }
+    /**
+     * <code>.pb.OrgIdsResult orgIds = 3;</code>
+     */
+    @Override
+    public OrgIdsResultOrBuilder getOrgIdsOrBuilder() {
+      return getOrgIds();
+    }
+
     private byte memoizedIsInitialized = -1;
     @Override
     public final boolean isInitialized() {
@@ -2592,6 +3875,9 @@ public final class UcsPb {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
       }
+      if (orgIds_ != null) {
+        output.writeMessage(3, getOrgIds());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -2607,6 +3893,10 @@ public final class UcsPb {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
+      }
+      if (orgIds_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, getOrgIds());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2627,6 +3917,11 @@ public final class UcsPb {
           != other.getSuccess()) return false;
       if (!getMessage()
           .equals(other.getMessage())) return false;
+      if (hasOrgIds() != other.hasOrgIds()) return false;
+      if (hasOrgIds()) {
+        if (!getOrgIds()
+            .equals(other.getOrgIds())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2643,6 +3938,10 @@ public final class UcsPb {
           getSuccess());
       hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
       hash = (53 * hash) + getMessage().hashCode();
+      if (hasOrgIds()) {
+        hash = (37 * hash) + ORGIDS_FIELD_NUMBER;
+        hash = (53 * hash) + getOrgIds().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2780,6 +4079,12 @@ public final class UcsPb {
 
         message_ = "";
 
+        if (orgIdsBuilder_ == null) {
+          orgIds_ = null;
+        } else {
+          orgIds_ = null;
+          orgIdsBuilder_ = null;
+        }
         return this;
       }
 
@@ -2808,6 +4113,11 @@ public final class UcsPb {
         Result result = new Result(this);
         result.success_ = success_;
         result.message_ = message_;
+        if (orgIdsBuilder_ == null) {
+          result.orgIds_ = orgIds_;
+        } else {
+          result.orgIds_ = orgIdsBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -2862,6 +4172,9 @@ public final class UcsPb {
         if (!other.getMessage().isEmpty()) {
           message_ = other.message_;
           onChanged();
+        }
+        if (other.hasOrgIds()) {
+          mergeOrgIds(other.getOrgIds());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2998,6 +4311,125 @@ public final class UcsPb {
         onChanged();
         return this;
       }
+
+      private OrgIdsResult orgIds_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          OrgIdsResult, OrgIdsResult.Builder, OrgIdsResultOrBuilder> orgIdsBuilder_;
+      /**
+       * <code>.pb.OrgIdsResult orgIds = 3;</code>
+       * @return Whether the orgIds field is set.
+       */
+      public boolean hasOrgIds() {
+        return orgIdsBuilder_ != null || orgIds_ != null;
+      }
+      /**
+       * <code>.pb.OrgIdsResult orgIds = 3;</code>
+       * @return The orgIds.
+       */
+      public OrgIdsResult getOrgIds() {
+        if (orgIdsBuilder_ == null) {
+          return orgIds_ == null ? OrgIdsResult.getDefaultInstance() : orgIds_;
+        } else {
+          return orgIdsBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.pb.OrgIdsResult orgIds = 3;</code>
+       */
+      public Builder setOrgIds(OrgIdsResult value) {
+        if (orgIdsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          orgIds_ = value;
+          onChanged();
+        } else {
+          orgIdsBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.pb.OrgIdsResult orgIds = 3;</code>
+       */
+      public Builder setOrgIds(
+          OrgIdsResult.Builder builderForValue) {
+        if (orgIdsBuilder_ == null) {
+          orgIds_ = builderForValue.build();
+          onChanged();
+        } else {
+          orgIdsBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.pb.OrgIdsResult orgIds = 3;</code>
+       */
+      public Builder mergeOrgIds(OrgIdsResult value) {
+        if (orgIdsBuilder_ == null) {
+          if (orgIds_ != null) {
+            orgIds_ =
+              OrgIdsResult.newBuilder(orgIds_).mergeFrom(value).buildPartial();
+          } else {
+            orgIds_ = value;
+          }
+          onChanged();
+        } else {
+          orgIdsBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.pb.OrgIdsResult orgIds = 3;</code>
+       */
+      public Builder clearOrgIds() {
+        if (orgIdsBuilder_ == null) {
+          orgIds_ = null;
+          onChanged();
+        } else {
+          orgIds_ = null;
+          orgIdsBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.pb.OrgIdsResult orgIds = 3;</code>
+       */
+      public OrgIdsResult.Builder getOrgIdsBuilder() {
+        
+        onChanged();
+        return getOrgIdsFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.pb.OrgIdsResult orgIds = 3;</code>
+       */
+      public OrgIdsResultOrBuilder getOrgIdsOrBuilder() {
+        if (orgIdsBuilder_ != null) {
+          return orgIdsBuilder_.getMessageOrBuilder();
+        } else {
+          return orgIds_ == null ?
+              OrgIdsResult.getDefaultInstance() : orgIds_;
+        }
+      }
+      /**
+       * <code>.pb.OrgIdsResult orgIds = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          OrgIdsResult, OrgIdsResult.Builder, OrgIdsResultOrBuilder>
+          getOrgIdsFieldBuilder() {
+        if (orgIdsBuilder_ == null) {
+          orgIdsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              OrgIdsResult, OrgIdsResult.Builder, OrgIdsResultOrBuilder>(
+                  getOrgIds(),
+                  getParentForChildren(),
+                  isClean());
+          orgIds_ = null;
+        }
+        return orgIdsBuilder_;
+      }
       @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3051,6 +4483,794 @@ public final class UcsPb {
 
   }
 
+  public interface OrgIdsResultOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pb.OrgIdsResult)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string orgPermissionType = 1;</code>
+     * @return The orgPermissionType.
+     */
+    String getOrgPermissionType();
+    /**
+     * <code>string orgPermissionType = 1;</code>
+     * @return The bytes for orgPermissionType.
+     */
+    com.google.protobuf.ByteString
+        getOrgPermissionTypeBytes();
+
+    /**
+     * <code>repeated string orgIds = 2;</code>
+     * @return A list containing the orgIds.
+     */
+    java.util.List<String>
+        getOrgIdsList();
+    /**
+     * <code>repeated string orgIds = 2;</code>
+     * @return The count of orgIds.
+     */
+    int getOrgIdsCount();
+    /**
+     * <code>repeated string orgIds = 2;</code>
+     * @param index The index of the element to return.
+     * @return The orgIds at the given index.
+     */
+    String getOrgIds(int index);
+    /**
+     * <code>repeated string orgIds = 2;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the orgIds at the given index.
+     */
+    com.google.protobuf.ByteString
+        getOrgIdsBytes(int index);
+  }
+  /**
+   * Protobuf type {@code pb.OrgIdsResult}
+   */
+  public static final class OrgIdsResult extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:pb.OrgIdsResult)
+      OrgIdsResultOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use OrgIdsResult.newBuilder() to construct.
+    private OrgIdsResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private OrgIdsResult() {
+      orgPermissionType_ = "";
+      orgIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @Override
+    @SuppressWarnings({"unused"})
+    protected Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new OrgIdsResult();
+    }
+
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private OrgIdsResult(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              String s = input.readStringRequireUtf8();
+
+              orgPermissionType_ = s;
+              break;
+            }
+            case 18: {
+              String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                orgIds_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              orgIds_.add(s);
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          orgIds_ = orgIds_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return UcsPb.internal_static_pb_OrgIdsResult_descriptor;
+    }
+
+    @Override
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return UcsPb.internal_static_pb_OrgIdsResult_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              OrgIdsResult.class, Builder.class);
+    }
+
+    public static final int ORGPERMISSIONTYPE_FIELD_NUMBER = 1;
+    private volatile Object orgPermissionType_;
+    /**
+     * <code>string orgPermissionType = 1;</code>
+     * @return The orgPermissionType.
+     */
+    @Override
+    public String getOrgPermissionType() {
+      Object ref = orgPermissionType_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        orgPermissionType_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string orgPermissionType = 1;</code>
+     * @return The bytes for orgPermissionType.
+     */
+    @Override
+    public com.google.protobuf.ByteString
+        getOrgPermissionTypeBytes() {
+      Object ref = orgPermissionType_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        orgPermissionType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ORGIDS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList orgIds_;
+    /**
+     * <code>repeated string orgIds = 2;</code>
+     * @return A list containing the orgIds.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getOrgIdsList() {
+      return orgIds_;
+    }
+    /**
+     * <code>repeated string orgIds = 2;</code>
+     * @return The count of orgIds.
+     */
+    public int getOrgIdsCount() {
+      return orgIds_.size();
+    }
+    /**
+     * <code>repeated string orgIds = 2;</code>
+     * @param index The index of the element to return.
+     * @return The orgIds at the given index.
+     */
+    public String getOrgIds(int index) {
+      return orgIds_.get(index);
+    }
+    /**
+     * <code>repeated string orgIds = 2;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the orgIds at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getOrgIdsBytes(int index) {
+      return orgIds_.getByteString(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(orgPermissionType_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, orgPermissionType_);
+      }
+      for (int i = 0; i < orgIds_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, orgIds_.getRaw(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(orgPermissionType_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, orgPermissionType_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < orgIds_.size(); i++) {
+          dataSize += computeStringSizeNoTag(orgIds_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getOrgIdsList().size();
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof OrgIdsResult)) {
+        return super.equals(obj);
+      }
+      OrgIdsResult other = (OrgIdsResult) obj;
+
+      if (!getOrgPermissionType()
+          .equals(other.getOrgPermissionType())) return false;
+      if (!getOrgIdsList()
+          .equals(other.getOrgIdsList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ORGPERMISSIONTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getOrgPermissionType().hashCode();
+      if (getOrgIdsCount() > 0) {
+        hash = (37 * hash) + ORGIDS_FIELD_NUMBER;
+        hash = (53 * hash) + getOrgIdsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static OrgIdsResult parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static OrgIdsResult parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static OrgIdsResult parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static OrgIdsResult parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static OrgIdsResult parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static OrgIdsResult parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static OrgIdsResult parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static OrgIdsResult parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static OrgIdsResult parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static OrgIdsResult parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static OrgIdsResult parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static OrgIdsResult parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(OrgIdsResult prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code pb.OrgIdsResult}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:pb.OrgIdsResult)
+        OrgIdsResultOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return UcsPb.internal_static_pb_OrgIdsResult_descriptor;
+      }
+
+      @Override
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return UcsPb.internal_static_pb_OrgIdsResult_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                OrgIdsResult.class, Builder.class);
+      }
+
+      // Construct using ucs.org.pb.UcsPb.OrgIdsResult.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @Override
+      public Builder clear() {
+        super.clear();
+        orgPermissionType_ = "";
+
+        orgIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      @Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return UcsPb.internal_static_pb_OrgIdsResult_descriptor;
+      }
+
+      @Override
+      public OrgIdsResult getDefaultInstanceForType() {
+        return OrgIdsResult.getDefaultInstance();
+      }
+
+      @Override
+      public OrgIdsResult build() {
+        OrgIdsResult result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @Override
+      public OrgIdsResult buildPartial() {
+        OrgIdsResult result = new OrgIdsResult(this);
+        int from_bitField0_ = bitField0_;
+        result.orgPermissionType_ = orgPermissionType_;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          orgIds_ = orgIds_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.orgIds_ = orgIds_;
+        onBuilt();
+        return result;
+      }
+
+      @Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return super.setField(field, value);
+      }
+      @Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof OrgIdsResult) {
+          return mergeFrom((OrgIdsResult)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(OrgIdsResult other) {
+        if (other == OrgIdsResult.getDefaultInstance()) return this;
+        if (!other.getOrgPermissionType().isEmpty()) {
+          orgPermissionType_ = other.orgPermissionType_;
+          onChanged();
+        }
+        if (!other.orgIds_.isEmpty()) {
+          if (orgIds_.isEmpty()) {
+            orgIds_ = other.orgIds_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureOrgIdsIsMutable();
+            orgIds_.addAll(other.orgIds_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        OrgIdsResult parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (OrgIdsResult) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private Object orgPermissionType_ = "";
+      /**
+       * <code>string orgPermissionType = 1;</code>
+       * @return The orgPermissionType.
+       */
+      public String getOrgPermissionType() {
+        Object ref = orgPermissionType_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          orgPermissionType_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>string orgPermissionType = 1;</code>
+       * @return The bytes for orgPermissionType.
+       */
+      public com.google.protobuf.ByteString
+          getOrgPermissionTypeBytes() {
+        Object ref = orgPermissionType_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          orgPermissionType_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string orgPermissionType = 1;</code>
+       * @param value The orgPermissionType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrgPermissionType(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        orgPermissionType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string orgPermissionType = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOrgPermissionType() {
+        
+        orgPermissionType_ = getDefaultInstance().getOrgPermissionType();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string orgPermissionType = 1;</code>
+       * @param value The bytes for orgPermissionType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrgPermissionTypeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        orgPermissionType_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList orgIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureOrgIdsIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          orgIds_ = new com.google.protobuf.LazyStringArrayList(orgIds_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated string orgIds = 2;</code>
+       * @return A list containing the orgIds.
+       */
+      public com.google.protobuf.ProtocolStringList
+          getOrgIdsList() {
+        return orgIds_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string orgIds = 2;</code>
+       * @return The count of orgIds.
+       */
+      public int getOrgIdsCount() {
+        return orgIds_.size();
+      }
+      /**
+       * <code>repeated string orgIds = 2;</code>
+       * @param index The index of the element to return.
+       * @return The orgIds at the given index.
+       */
+      public String getOrgIds(int index) {
+        return orgIds_.get(index);
+      }
+      /**
+       * <code>repeated string orgIds = 2;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the orgIds at the given index.
+       */
+      public com.google.protobuf.ByteString
+          getOrgIdsBytes(int index) {
+        return orgIds_.getByteString(index);
+      }
+      /**
+       * <code>repeated string orgIds = 2;</code>
+       * @param index The index to set the value at.
+       * @param value The orgIds to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrgIds(
+          int index, String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureOrgIdsIsMutable();
+        orgIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string orgIds = 2;</code>
+       * @param value The orgIds to add.
+       * @return This builder for chaining.
+       */
+      public Builder addOrgIds(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureOrgIdsIsMutable();
+        orgIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string orgIds = 2;</code>
+       * @param values The orgIds to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllOrgIds(
+          Iterable<String> values) {
+        ensureOrgIdsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, orgIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string orgIds = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOrgIds() {
+        orgIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string orgIds = 2;</code>
+       * @param value The bytes of the orgIds to add.
+       * @return This builder for chaining.
+       */
+      public Builder addOrgIdsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureOrgIdsIsMutable();
+        orgIds_.add(value);
+        onChanged();
+        return this;
+      }
+      @Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:pb.OrgIdsResult)
+    }
+
+    // @@protoc_insertion_point(class_scope:pb.OrgIdsResult)
+    private static final OrgIdsResult DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new OrgIdsResult();
+    }
+
+    public static OrgIdsResult getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<OrgIdsResult>
+        PARSER = new com.google.protobuf.AbstractParser<OrgIdsResult>() {
+      @Override
+      public OrgIdsResult parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new OrgIdsResult(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<OrgIdsResult> parser() {
+      return PARSER;
+    }
+
+    @Override
+    public com.google.protobuf.Parser<OrgIdsResult> getParserForType() {
+      return PARSER;
+    }
+
+    @Override
+    public OrgIdsResult getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_pb_AuthenticationRequest_descriptor;
   private static final 
@@ -3067,10 +5287,20 @@ public final class UcsPb {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_pb_Action_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_pb_ActionWithOrgId_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_pb_ActionWithOrgId_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_pb_Result_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_pb_Result_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_pb_OrgIdsResult_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_pb_OrgIdsResult_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3081,16 +5311,22 @@ public final class UcsPb {
   static {
     String[] descriptorData = {
       "\n\nauth.proto\022\002pb\"\027\n\025AuthenticationReques" +
-      "t\"i\n\024AuthorizationRequest\022\027\n\roperationCo" +
-      "de\030\001 \001(\tH\000\022\034\n\006action\030\002 \001(\0132\n.pb.ActionH\000" +
-      "\022\017\n\005orgId\030\003 \001(\tH\000B\t\n\007payload\"7\n\006Action\022\017" +
-      "\n\007service\030\001 \001(\t\022\014\n\004path\030\002 \001(\t\022\016\n\006method\030" +
-      "\003 \001(\t\"*\n\006Result\022\017\n\007success\030\001 \001(\010\022\017\n\007mess" +
-      "age\030\002 \001(\t2\201\001\n\013AuthService\0229\n\016Authenticat" +
-      "ion\022\031.pb.AuthenticationRequest\032\n.pb.Resu" +
-      "lt\"\000\0227\n\rAuthorization\022\030.pb.Authorization" +
-      "Request\032\n.pb.Result\"\000B\"\n\nucs.org.pbB\005Ucs" +
-      "PbZ\rproto/auth/pbb\006proto3"
+      "t\"\277\001\n\024AuthorizationRequest\022\027\n\roperationC" +
+      "ode\030\001 \001(\tH\000\022\034\n\006action\030\002 \001(\0132\n.pb.ActionH" +
+      "\000\022\017\n\005orgId\030\003 \001(\tH\000\022.\n\017actionWithOrgId\030\004 " +
+      "\001(\0132\023.pb.ActionWithOrgIdH\000\022$\n\016orgIdsByAc" +
+      "tion\030\005 \001(\0132\n.pb.ActionH\000B\t\n\007payload\"7\n\006A" +
+      "ction\022\017\n\007service\030\001 \001(\t\022\014\n\004path\030\002 \001(\t\022\016\n\006" +
+      "method\030\003 \001(\t\"<\n\017ActionWithOrgId\022\032\n\006actio" +
+      "n\030\001 \001(\0132\n.pb.Action\022\r\n\005orgId\030\002 \001(\t\"L\n\006Re" +
+      "sult\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\022 " +
+      "\n\006orgIds\030\003 \001(\0132\020.pb.OrgIdsResult\"9\n\014OrgI" +
+      "dsResult\022\031\n\021orgPermissionType\030\001 \001(\t\022\016\n\006o" +
+      "rgIds\030\002 \003(\t2\201\001\n\013AuthService\0229\n\016Authentic" +
+      "ation\022\031.pb.AuthenticationRequest\032\n.pb.Re" +
+      "sult\"\000\0227\n\rAuthorization\022\030.pb.Authorizati" +
+      "onRequest\032\n.pb.Result\"\000B\"\n\nucs.org.pbB\005U" +
+      "csPbZ\rproto/auth/pbb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3107,19 +5343,31 @@ public final class UcsPb {
     internal_static_pb_AuthorizationRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_pb_AuthorizationRequest_descriptor,
-        new String[] { "OperationCode", "Action", "OrgId", "Payload", });
+        new String[] { "OperationCode", "Action", "OrgId", "ActionWithOrgId", "OrgIdsByAction", "Payload", });
     internal_static_pb_Action_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_pb_Action_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_pb_Action_descriptor,
         new String[] { "Service", "Path", "Method", });
-    internal_static_pb_Result_descriptor =
+    internal_static_pb_ActionWithOrgId_descriptor =
       getDescriptor().getMessageTypes().get(3);
+    internal_static_pb_ActionWithOrgId_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_pb_ActionWithOrgId_descriptor,
+        new String[] { "Action", "OrgId", });
+    internal_static_pb_Result_descriptor =
+      getDescriptor().getMessageTypes().get(4);
     internal_static_pb_Result_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_pb_Result_descriptor,
-        new String[] { "Success", "Message", });
+        new String[] { "Success", "Message", "OrgIds", });
+    internal_static_pb_OrgIdsResult_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_pb_OrgIdsResult_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_pb_OrgIdsResult_descriptor,
+        new String[] { "OrgPermissionType", "OrgIds", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

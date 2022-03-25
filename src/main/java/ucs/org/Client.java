@@ -18,4 +18,8 @@ public interface Client {
     UcsResult<PermitResult> ValidatePermAction(String service, String path, String method);
 
     UcsResult<PermitResult> ValidatePermOrgById(String orgId);
+
+    UcsResult<PermitResult> ValidatePermActionWithOrgId(String service, String path, String method, String orgId);
+
+    UcsResult<OrgIdsResult> QueryOrgIdsByAction(String service, String path, String method);
 }

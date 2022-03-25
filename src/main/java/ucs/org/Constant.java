@@ -9,6 +9,12 @@ import static io.grpc.Metadata.ASCII_STRING_MARSHALLER;
  * @date 2022-03-16
  */
 interface Constant {
+    String OrgPermissionTypeTree = "tree";
+    String OrgPermissionTypeSelf = "self";
+    String OrgPermissionTypeNone = "none";
+    String OrgPermissionTypeAll = "all";
+    String OrgPermissionTypeCustom = "custom";
+
     String TIMEOUT_MSG = "timeout";
     String UNKNOWN_MSG = "unknown";
     String UNAUTHORIZED_MSG = "权限不足";
@@ -20,7 +26,8 @@ interface Constant {
     String ValidatePermOperationByCodeURL = "/api/v1/ucs/current/check-operation";
     String ValidatePermActionURL = "/api/v1/ucs/current/check-action";
     String ValidatePermOrgByIdURL = "/api/v1/ucs/current/check-org";
-    String RenewTokenURL = "/api/v1/ucs/public/renew-token";
+    String ValidatePermActionWithOrgIdURL = "/api/v1/ucs/current/check-action-with-org-id";
+    String QueryOrgIdsByActionURL = "/api/v1/ucs/current/query-action-org-ids";
 
     int DEFAULT_TIMEOUT_IN_SECONDS = 3;
     String DEADLINE_EXCEEDED = "DEADLINE_EXCEEDED";

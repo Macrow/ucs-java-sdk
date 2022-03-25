@@ -1,5 +1,6 @@
 package ucs.org;
 
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.io.IoUtil;
 import io.grpc.*;
 import ucs.org.pb.AuthServiceGrpc;
@@ -83,6 +84,67 @@ public class RpcClient implements Client {
         return authorization(UcsPb.AuthorizationRequest.newBuilder()
                 .setOrgId(orgId)
                 .build());
+    }
+
+    @Override
+    public UcsResult<PermitResult> ValidatePermActionWithOrgId(String service, String path, String method, String orgId) {
+        return authorization(UcsPb.AuthorizationRequest.newBuilder()
+                .setActionWithOrgId(UcsPb.ActionWithOrgId.newBuilder()
+                        .setAction(UcsPb.Action.newBuilder()
+                                .setService(service)
+                                .setPath(path)
+                                .setMethod(method)
+                                .build())
+                        .setOrgId(orgId)
+                        .build())
+                .build());
+    }
+
+    @Override
+    public UcsResult<OrgIdsResult> QueryOrgIdsByAction(String service, String path, String method) {
+        this.prepare();
+        try {
+            UcsPb.Result res = blockingStub
+                    .withCallCredentials(jwtCredential)
+                    .withDeadlineAfter(timeout, TimeUnit.SECONDS)
+                    .authorization(UcsPb.AuthorizationRequest.newBuilder()
+                            .setOrgIdsByAction(UcsPb.Action.newBuilder()
+                                    .setService(service)
+                                    .setPath(path)
+                                    .setMethod(method)
+                                    .build())
+                            .build());
+            return UcsResult.<OrgIdsResult>builder()
+                    .success(res.getSuccess())
+                    .message(res.getMessage())
+                    .result(OrgIdsResult.builder()
+                            .orgPermissionType(res.getOrgIds().getOrgPermissionType())
+                            .orgIds(res.getOrgIds().getOrgIdsList())
+                            .build())
+                    .build();
+        } catch (Exception e) {
+            if (e.getMessage().contains(Constant.DEADLINE_EXCEEDED)) {
+                return UcsResult.<OrgIdsResult>builder()
+                        .success(false)
+                        .message(Constant.TIMEOUT_MSG)
+                        .result(OrgIdsResult.builder()
+                                .orgPermissionType(Constant.OrgPermissionTypeNone)
+                                .orgIds(ListUtil.empty())
+                                .build())
+                        .build();
+            }
+            e.printStackTrace();
+            return UcsResult.<OrgIdsResult>builder()
+                    .success(false)
+                    .message(Constant.UNKNOWN_MSG)
+                    .result(OrgIdsResult.builder()
+                            .orgPermissionType(Constant.OrgPermissionTypeNone)
+                            .orgIds(ListUtil.empty())
+                            .build())
+                    .build();
+        } finally {
+            channel.shutdown();
+        }
     }
 
     private UcsResult<Object> authentication(UcsPb.AuthenticationRequest req) {
