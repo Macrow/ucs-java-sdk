@@ -102,7 +102,7 @@ public class RpcClient implements Client {
 
     @Override
     public UcsResult<OrgIdsResult> QueryOrgIdsByAction(String service, String path, String method) {
-        this.prepare();
+        this.prepare(true);
         try {
             UcsPb.Result res = blockingStub
                     .withCallCredentials(jwtCredential)
@@ -147,8 +147,67 @@ public class RpcClient implements Client {
         }
     }
 
+    @Override
+    public UcsResult<AccessTokenResult> OAuth2TokenByAuthorizationCode(String code, String clientId, String clientSecret, String deviceId, String deviceName) {
+        return oauth2Token(UcsPb.OAuth2TokenRequest.newBuilder()
+                .setAuthorizationCode(
+                        UcsPb.AuthorizationCode.newBuilder()
+                                .setCode(code)
+                                .setClientId(clientId)
+                                .setClientSecret(clientSecret)
+                                .setDeviceId(deviceId)
+                                .setDeviceName(deviceName)
+                                .build()
+                )
+                .build());
+    }
+
+    @Override
+    public UcsResult<AccessTokenResult> OAuth2TokenByPassword(String username, String password, String deviceId, String deviceName) {
+        return oauth2Token(UcsPb.OAuth2TokenRequest.newBuilder()
+                .setPasswordCredentials(
+                        UcsPb.PasswordCredentials.newBuilder()
+                                .setUsername(username)
+                                .setPassword(password)
+                                .setDeviceId(deviceId)
+                                .setDeviceName(deviceName)
+                                .build()
+                )
+                .build());
+    }
+
+    private UcsResult<AccessTokenResult> oauth2Token(UcsPb.OAuth2TokenRequest request) {
+        this.prepare(false);
+        try {
+            UcsPb.OAuth2TokenResponse res = blockingStub
+                    .withDeadlineAfter(timeout, TimeUnit.SECONDS)
+                    .oAuth2Token(request);
+            return UcsResult.<AccessTokenResult>builder()
+                    .success(res.getSuccess())
+                    .message(res.getMessage())
+                    .result(AccessTokenResult.builder().accessToken(res.getAccessToken()).build())
+                    .build();
+        } catch (Exception e) {
+            if (e.getMessage().contains(Constant.DEADLINE_EXCEEDED)) {
+                return UcsResult.<AccessTokenResult>builder()
+                        .success(false)
+                        .message(Constant.TIMEOUT_MSG)
+                        .result(AccessTokenResult.builder().accessToken(null).build())
+                        .build();
+            }
+            e.printStackTrace();
+            return UcsResult.<AccessTokenResult>builder()
+                    .success(false)
+                    .message(Constant.UNKNOWN_MSG)
+                    .result(AccessTokenResult.builder().accessToken(null).build())
+                    .build();
+        } finally {
+            channel.shutdown();
+        }
+    }
+
     private UcsResult<Object> authentication(UcsPb.AuthenticationRequest req) {
-        this.prepare();
+        this.prepare(true);
         try {
             UcsPb.Result res = blockingStub
                     .withCallCredentials(jwtCredential)
@@ -170,7 +229,7 @@ public class RpcClient implements Client {
     }
 
     private UcsResult<PermitResult> authorization(UcsPb.AuthorizationRequest req) {
-        this.prepare();
+        this.prepare(true);
         try {
             UcsPb.Result res = blockingStub
                     .withCallCredentials(jwtCredential)
@@ -200,8 +259,8 @@ public class RpcClient implements Client {
         }
     }
 
-    private void prepare() {
-        if (this.jwtCredential == null) {
+    private void prepare(boolean needJwtCredential) {
+        if (needJwtCredential && this.jwtCredential == null) {
             throw new IllegalArgumentException("please provide token first");
         }
         String[] array = address.split(":");

@@ -97,6 +97,29 @@ public class HttpClient implements Client {
         return request(Constant.QueryOrgIdsByActionURL, Method.POST, formData);
     }
 
+    @Override
+    public UcsResult<AccessTokenResult> OAuth2TokenByAuthorizationCode(String code, String clientId, String clientSecret, String deviceId, String deviceName) {
+        Map<String, Object> formData = new HashMap<>();
+        formData.put("grantType", "authorization_code");
+        formData.put("code", code);
+        formData.put("clientId", clientId);
+        formData.put("clientSecret", clientSecret);
+        formData.put("deviceId", deviceId);
+        formData.put("deviceName", deviceName);
+        return request(Constant.OAuth2TokenURL, Method.POST, formData);
+    }
+
+    @Override
+    public UcsResult<AccessTokenResult> OAuth2TokenByPassword(String username, String password, String deviceId, String deviceName) {
+        Map<String, Object> formData = new HashMap<>();
+        formData.put("grantType", "password");
+        formData.put("username", username);
+        formData.put("password", password);
+        formData.put("deviceId", deviceId);
+        formData.put("deviceName", deviceName);
+        return request(Constant.OAuth2TokenURL, Method.POST, formData);
+    }
+
     private <T> UcsResult<T> request(String url, Method method, Map<String, Object> formData) {
         prepare();
         boolean success = false;
@@ -151,6 +174,11 @@ public class HttpClient implements Client {
                             OrgIdsResult orgIdsResult = result.getResult().toBean(OrgIdsResult.class);
                             message = "";
                             res = (T) orgIdsResult;
+                        }
+                        if (result.getResult().get("accessToken") != null) {
+                            AccessTokenResult accessTokenResult = result.getResult().toBean(AccessTokenResult.class);
+                            message = "";
+                            res = (T) accessTokenResult;
                         }
                     }
                 }

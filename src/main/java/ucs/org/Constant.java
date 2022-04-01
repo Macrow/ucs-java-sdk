@@ -28,6 +28,7 @@ interface Constant {
     String ValidatePermOrgByIdURL = "/api/v1/ucs/current/check-org";
     String ValidatePermActionWithOrgIdURL = "/api/v1/ucs/current/check-action-with-org-id";
     String QueryOrgIdsByActionURL = "/api/v1/ucs/current/query-action-org-ids";
+    String OAuth2TokenURL = "/api/v1/ucs/oauth2/token";
 
     int DEFAULT_TIMEOUT_IN_SECONDS = 3;
     String DEADLINE_EXCEEDED = "DEADLINE_EXCEEDED";

@@ -77,6 +77,37 @@ public final class AuthServiceGrpc {
     return getAuthorizationMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<UcsPb.OAuth2TokenRequest,
+      UcsPb.OAuth2TokenResponse> getOAuth2TokenMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "OAuth2Token",
+      requestType = UcsPb.OAuth2TokenRequest.class,
+      responseType = UcsPb.OAuth2TokenResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UcsPb.OAuth2TokenRequest,
+      UcsPb.OAuth2TokenResponse> getOAuth2TokenMethod() {
+    io.grpc.MethodDescriptor<UcsPb.OAuth2TokenRequest, UcsPb.OAuth2TokenResponse> getOAuth2TokenMethod;
+    if ((getOAuth2TokenMethod = AuthServiceGrpc.getOAuth2TokenMethod) == null) {
+      synchronized (AuthServiceGrpc.class) {
+        if ((getOAuth2TokenMethod = AuthServiceGrpc.getOAuth2TokenMethod) == null) {
+          AuthServiceGrpc.getOAuth2TokenMethod = getOAuth2TokenMethod =
+              io.grpc.MethodDescriptor.<UcsPb.OAuth2TokenRequest, UcsPb.OAuth2TokenResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "OAuth2Token"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  UcsPb.OAuth2TokenRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  UcsPb.OAuth2TokenResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new AuthServiceMethodDescriptorSupplier("OAuth2Token"))
+              .build();
+        }
+      }
+    }
+    return getOAuth2TokenMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -139,6 +170,13 @@ public final class AuthServiceGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAuthorizationMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void oAuth2Token(UcsPb.OAuth2TokenRequest request,
+                            io.grpc.stub.StreamObserver<UcsPb.OAuth2TokenResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getOAuth2TokenMethod(), responseObserver);
+    }
+
     @Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -155,6 +193,13 @@ public final class AuthServiceGrpc {
                 UcsPb.AuthorizationRequest,
                 UcsPb.Result>(
                   this, METHODID_AUTHORIZATION)))
+          .addMethod(
+            getOAuth2TokenMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                UcsPb.OAuth2TokenRequest,
+                UcsPb.OAuth2TokenResponse>(
+                  this, METHODID_OAUTH2TOKEN)))
           .build();
     }
   }
@@ -188,6 +233,14 @@ public final class AuthServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getAuthorizationMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void oAuth2Token(UcsPb.OAuth2TokenRequest request,
+                            io.grpc.stub.StreamObserver<UcsPb.OAuth2TokenResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getOAuth2TokenMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -216,6 +269,13 @@ public final class AuthServiceGrpc {
     public UcsPb.Result authorization(UcsPb.AuthorizationRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getAuthorizationMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public UcsPb.OAuth2TokenResponse oAuth2Token(UcsPb.OAuth2TokenRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getOAuth2TokenMethod(), getCallOptions(), request);
     }
   }
 
@@ -248,10 +308,19 @@ public final class AuthServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getAuthorizationMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<UcsPb.OAuth2TokenResponse> oAuth2Token(
+        UcsPb.OAuth2TokenRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getOAuth2TokenMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_AUTHENTICATION = 0;
   private static final int METHODID_AUTHORIZATION = 1;
+  private static final int METHODID_OAUTH2TOKEN = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -277,6 +346,10 @@ public final class AuthServiceGrpc {
         case METHODID_AUTHORIZATION:
           serviceImpl.authorization((UcsPb.AuthorizationRequest) request,
               (io.grpc.stub.StreamObserver<UcsPb.Result>) responseObserver);
+          break;
+        case METHODID_OAUTH2TOKEN:
+          serviceImpl.oAuth2Token((UcsPb.OAuth2TokenRequest) request,
+              (io.grpc.stub.StreamObserver<UcsPb.OAuth2TokenResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -341,6 +414,7 @@ public final class AuthServiceGrpc {
               .setSchemaDescriptor(new AuthServiceFileDescriptorSupplier())
               .addMethod(getAuthenticationMethod())
               .addMethod(getAuthorizationMethod())
+              .addMethod(getOAuth2TokenMethod())
               .build();
         }
       }
