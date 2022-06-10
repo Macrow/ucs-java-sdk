@@ -15,45 +15,42 @@
 </repositories>
 ```
 
-### 安装
+### 安装，请指定版本
 ```
 dependency>
     <groupId>com.github.Macrow</groupId>
     <artifactId>ucs-java-sdk</artifactId>
-    <version>1.3.1</version>
+    <version>${ucs-java-sdk.version}</version>
 </dependency>
-```
-
-### 验证Jwt
-```
-Validator v = new Validator(KEY);
-JwtUser jwtUser = v.ValidateJwt(TOKEN);
 ```
 
 ### 创建连接UCS的客户端
 ```
-Client client = new RpcClient("your.domain.com:port"); // Rpc方式
-// Client client = new RpcClient(certFile, "your.domain.com:port") // TLS连接，需要UCS服务也同时开启
-// Client client = new HttpClient("https://your.domain.com:port", yourAccessCode"); // Http方式
-client.SetToken(token)
+Client client = new HttpClient("https://your.domain.com:port", yourAccessCode"); // Http方式
+client.SetUserToken(TOKEN).SetClientIdAndSecret(CLIENT_ID, CLIENT_SECRET);
 ```
 
 ### UCS服务端验证Jwt
 ```
-Result res = client.ValidateJwt();
+Result res = client.UserValidateJwt();
 ```
 
 ### UCS服务端验证操作码
 ```
-Result res = client.ValidatePermOperationByCode("UCS_O_CODE");
+Result res = client.UserValidatePermOperationByCode("UCS_O_CODE");
 ```
 
 ### UCS服务端验证接口
 ```
-Result res = client.ValidatePermAction("ucs", "/api/v1/ucs/users", "get");
+Result res = client.UserValidatePermAction("ucs", "/api/v1/ucs/users", "get");
 ```
 
 ### UCS服务端验证用户是否拥有机构权限
 ```
-Result res = client.ValidatePermOrgById("org_id_is_here");
+Result res = client.UserValidatePermOrgById("org_id_is_here");
+```
+
+### 向UCS服务端发起应用级调用
+```
+UcsResult<Object> clientRes = c.ClientRequest("POST", "/api/v1/ucs/client/validate", null);
 ```

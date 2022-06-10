@@ -1,6 +1,5 @@
 package ucs.org;
 
-import cn.hutool.json.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,8 +13,8 @@ import lombok.Setter;
 @Setter
 @Builder
 @AllArgsConstructor
-public class HttpResult {
-    private JSONObject result;
+public class HttpResult<T> {
+    private T result;
     private Integer code;
     private String message;
 }

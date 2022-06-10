@@ -1,12 +1,15 @@
 package ucs.org;
 
+import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpStatus;
 import cn.hutool.http.Method;
 import cn.hutool.json.JSONUtil;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,10 +19,14 @@ import java.util.Map;
  */
 public class HttpClient implements Client {
     private final String baseUrl;
+    private final String accessCode;
     private String accessCodeHeader;
     private String randomKeyHeader;
-    private final String accessCode;
-    private String token = null;
+    private String userTokenHeader;
+    private String clientTokenHeader;
+    private String userToken = null;
+    private String clientId = null;
+    private String clientSecret = null;
     private int timeout = Constant.DEFAULT_TIMEOUT_IN_SECONDS;
 
     public HttpClient(String baseUrl, String accessCode) {
@@ -27,6 +34,8 @@ public class HttpClient implements Client {
         this.accessCode = accessCode;
         this.accessCodeHeader = Constant.DefaultHeaderAccessCode;
         this.randomKeyHeader = Constant.DefaultHeaderRandomKey;
+        this.userTokenHeader = Constant.BEARER_NAME;
+        this.clientTokenHeader = Constant.CLIENT_HEADER_NAME;
     }
 
     @Override
@@ -38,173 +47,180 @@ public class HttpClient implements Client {
     }
 
     @Override
-    public Client SetToken(String token) {
-        this.token = token;
+    public Client SetUserToken(String token) {
+        this.userToken = token;
         return this;
     }
 
     @Override
-    public Client SetHttpHeaderNames(String accessCodeHeader, String randomKeyHeader) {
+    public Client SetClientIdAndSecret(String clientId, String clientSecret) {
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+        return this;
+    }
+
+    @Override
+    public Client SetHttpHeaderNames(String accessCodeHeader, String randomKeyHeader, String userTokenHeader, String clientTokenHeader) {
         this.accessCodeHeader = accessCodeHeader;
         this.randomKeyHeader = randomKeyHeader;
+        this.userTokenHeader = userTokenHeader;
+        this.clientTokenHeader = clientTokenHeader;
         return this;
     }
 
     @Override
-    public UcsResult<Object> ValidateJwt() {
-        return request(Constant.ValidateJwtURL, Method.GET, null);
+    public UcsResult<Object> UserValidateJwt() {
+        return request(Constant.ValidateJwtURL, Method.GET, null, RequestType.USER);
     }
 
     @Override
-    public UcsResult<PermitResult> ValidatePermOperationByCode(String code) {
+    public UcsResult<PermitResult> UserValidatePermOperationByCode(String code) {
         Map<String, Object> formData = new HashMap<>();
         formData.put("code", code);
-        return request(Constant.ValidatePermOperationByCodeURL, Method.POST, formData);
+        return request(Constant.ValidatePermOperationByCodeURL, Method.POST, formData, RequestType.USER);
     }
 
     @Override
-    public UcsResult<PermitResult> ValidatePermAction(String service, String path, String method) {
+    public UcsResult<PermitResult> UserValidatePermAction(String service, String path, String method) {
         Map<String, Object> formData = new HashMap<>();
         formData.put("service", service);
         formData.put("path", path);
         formData.put("method", method);
-        return request(Constant.ValidatePermActionURL, Method.POST, formData);
+        return request(Constant.ValidatePermActionURL, Method.POST, formData, RequestType.USER);
     }
 
     @Override
-    public UcsResult<PermitResult> ValidatePermOrgById(String orgId) {
+    public UcsResult<PermitResult> UserValidatePermOrgById(String orgId) {
         Map<String, Object> formData = new HashMap<>();
         formData.put("id", orgId);
-        return request(Constant.ValidatePermOrgByIdURL, Method.POST, formData);
+        return request(Constant.ValidatePermOrgByIdURL, Method.POST, formData, RequestType.USER);
     }
 
     @Override
-    public UcsResult<PermitResult> ValidatePermActionWithOrgId(String service, String path, String method, String orgId) {
+    public UcsResult<PermitResult> UserValidatePermActionWithOrgId(String service, String path, String method, String orgId) {
         Map<String, Object> formData = new HashMap<>();
         formData.put("service", service);
         formData.put("path", path);
         formData.put("method", method);
         formData.put("orgId", orgId);
-        return request(Constant.ValidatePermActionWithOrgIdURL, Method.POST, formData);
+        return request(Constant.ValidatePermActionWithOrgIdURL, Method.POST, formData, RequestType.USER);
     }
 
     @Override
-    public UcsResult<OrgIdsResult> QueryOrgIdsByAction(String service, String path, String method) {
+    public UcsResult<OrgIdsResult> UserQueryOrgIdsByAction(String service, String path, String method) {
         Map<String, Object> formData = new HashMap<>();
         formData.put("service", service);
         formData.put("path", path);
         formData.put("method", method);
-        return request(Constant.QueryOrgIdsByActionURL, Method.POST, formData);
+        return request(Constant.QueryOrgIdsByActionURL, Method.POST, formData, RequestType.USER);
     }
 
     @Override
-    public UcsResult<AccessTokenResult> OAuth2TokenByAuthorizationCode(String code, String clientId, String clientSecret, String deviceId, String deviceName) {
-        Map<String, Object> formData = new HashMap<>();
-        formData.put("grantType", "authorization_code");
-        formData.put("code", code);
-        formData.put("clientId", clientId);
-        formData.put("clientSecret", clientSecret);
-        formData.put("deviceId", deviceId);
-        formData.put("deviceName", deviceName);
-        return request(Constant.OAuth2TokenURL, Method.POST, formData);
+    public <T> UcsResult<T> ClientRequest(String method, String url, Map<String, Object> data) {
+        return request(url, getHttpMethod(method), data, RequestType.CLIENT);
     }
 
-    @Override
-    public UcsResult<AccessTokenResult> OAuth2TokenByPassword(String username, String password, String deviceId, String deviceName) {
-        Map<String, Object> formData = new HashMap<>();
-        formData.put("grantType", "password");
-        formData.put("username", username);
-        formData.put("password", password);
-        formData.put("deviceId", deviceId);
-        formData.put("deviceName", deviceName);
-        return request(Constant.OAuth2TokenURL, Method.POST, formData);
+    private Method getHttpMethod(String method) {
+        if (StrUtil.isBlank(method)) {
+            throw new IllegalArgumentException("方法不支持");
+        }
+        switch (method.toUpperCase()) {
+            case "GET":
+                return Method.GET;
+            case "POST":
+                return Method.POST;
+            case "PUT":
+                return Method.PUT;
+            case "PATCH":
+                return Method.PATCH;
+            case "DELETE":
+                return Method.DELETE;
+            default:
+                throw new IllegalArgumentException("方法不支持");
+        }
     }
 
-    private <T> UcsResult<T> request(String url, Method method, Map<String, Object> formData) {
-        prepare();
-        boolean success = false;
-        String message = Constant.UNKNOWN_MSG;
-        T res = null;
-        try {
-            HttpRequest req;
-            switch (method) {
-                case POST:
-                    req = HttpRequest.post(baseUrl + url);
-                    break;
-                case PUT:
-                    req = HttpRequest.put(baseUrl + url);
-                    break;
-                case PATCH:
-                    req = HttpRequest.patch(baseUrl + url);
-                    break;
-                case DELETE:
-                    req = HttpRequest.delete(baseUrl + url);
-                    break;
-                case GET:
-                default:
-                    req = HttpRequest.get(baseUrl + url);
-                    break;
-            }
-
-            req.timeout(this.timeout * 1000)
-                    .method(method)
-                    .header(Constant.BEARER_NAME, Constant.BEARER_TYPE + " " + this.token, false)
-                    .header(this.accessCodeHeader, this.accessCode, false)
-                    .header(this.randomKeyHeader, getRandomKey(6), false);
-            if (formData != null) {
-                req = req.form(formData);
-            }
-            HttpResponse httpResponse = req.execute();
+    private <T> UcsResult<T> request(String url, Method method, Map<String, Object> formData, RequestType requestType) {
+        String message;
+        HttpRequest req;
+        switch (method) {
+            case POST:
+                req = HttpRequest.post(baseUrl + url);
+                break;
+            case PUT:
+                req = HttpRequest.put(baseUrl + url);
+                break;
+            case PATCH:
+                req = HttpRequest.patch(baseUrl + url);
+                break;
+            case DELETE:
+                req = HttpRequest.delete(baseUrl + url);
+                break;
+            case GET:
+            default:
+                req = HttpRequest.get(baseUrl + url);
+                break;
+        }
+        req.timeout(this.timeout * 1000)
+                .method(method)
+                .header(this.accessCodeHeader, this.accessCode, true)
+                .header(this.randomKeyHeader, getRandomKey(6), true);
+        switch (requestType) {
+            case USER:
+                prepareForUserRequest();
+                req.header(this.userTokenHeader, Constant.BEARER_TYPE + " " + this.userToken, true);
+                break;
+            case CLIENT:
+                prepareForClientRequest();
+                req.header(this.clientTokenHeader, Base64.encode(this.clientId + "@" + this.clientSecret, StandardCharsets.UTF_8), true);
+                break;
+            default:
+                throw new IllegalArgumentException("不支持的请求类型");
+        }
+        if (formData != null) {
+            req = req.form(formData);
+        }
+        try (HttpResponse httpResponse = req.execute()) {
             if (httpResponse.getStatus() == HttpStatus.HTTP_OK) {
-                HttpResult result = JSONUtil.toBean(httpResponse.body(), HttpResult.class);
+                HttpResult<T> result = JSONUtil.toBean(httpResponse.body(), HttpResult.class);
                 if (result.getCode() == 0) {
-                    if (result.getResult().isEmpty()) {
-                        success = true;
-                    } else {
-                        if (result.getResult().get("permit") != null) {
-                            PermitResult permitResult = result.getResult().toBean(PermitResult.class);
-                            if (permitResult.getPermit()) {
-                                success = true;
-                            } else {
-                                message = Constant.UNAUTHORIZED_MSG;
-                            }
-                            res = (T) permitResult;
-                        }
-                        if (result.getResult().get("orgPermissionType") != null) {
-                            OrgIdsResult orgIdsResult = result.getResult().toBean(OrgIdsResult.class);
-                            message = "";
-                            res = (T) orgIdsResult;
-                        }
-                        if (result.getResult().get("accessToken") != null) {
-                            AccessTokenResult accessTokenResult = result.getResult().toBean(AccessTokenResult.class);
-                            message = "";
-                            res = (T) accessTokenResult;
-                        }
-                    }
-                }
-                if (!result.getMessage().isEmpty()) {
+                    return UcsResult.<T>builder()
+                            .success(true)
+                            .message("")
+                            .result(result.getResult())
+                            .build();
+                } else {
                     message = result.getMessage();
                 }
+            } else {
+                message = Constant.MSG_HTTP_FAILED;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            success = false;
-            message = Constant.UNKNOWN_MSG;
-            res = null;
+            message = Constant.MSG_UNKNOWN;
         }
         return UcsResult.<T>builder()
-                .success(success)
-                .message(success ? "" : message)
-                .result(res)
+                .success(false)
+                .message(message)
+                .result(null)
                 .build();
     }
 
-    private void prepare() {
-        if (this.token == null || this.token.isEmpty()) {
+    private void prepareForUserRequest() {
+        if (StrUtil.isBlank(this.baseUrl)) {
+            throw new IllegalArgumentException("please provide baseUrl first");
+        }
+        if (StrUtil.isBlank(this.userToken)) {
             throw new IllegalArgumentException("please provide token first");
         }
-        if (this.baseUrl == null || this.baseUrl.isEmpty()) {
+    }
+
+    private void prepareForClientRequest() {
+        if (StrUtil.isBlank(this.baseUrl)) {
             throw new IllegalArgumentException("please provide baseUrl first");
+        }
+        if (StrUtil.isBlank(this.clientId) || StrUtil.isBlank(this.clientSecret)) {
+            throw new IllegalArgumentException("please provide client id/secret");
         }
     }
 

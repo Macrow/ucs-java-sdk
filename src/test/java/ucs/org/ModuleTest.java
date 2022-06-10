@@ -5,105 +5,52 @@ import cn.hutool.json.JSONUtil;
 import org.junit.Test;
 
 public class ModuleTest {
-    final String CERT = "-----BEGIN CERTIFICATE-----\n" +
-            "MIIEOTCCAqGgAwIBAgIQVcpmr67YkofgWY2kgr7CNDANBgkqhkiG9w0BAQsFADB9\n" +
-            "MR4wHAYDVQQKExVta2NlcnQgZGV2ZWxvcG1lbnQgQ0ExKTAnBgNVBAsMIG1hY3Jv\n" +
-            "d0BNYWNyb3ctbWJwLmxvY2FsIChNYWNyb3cpMTAwLgYDVQQDDCdta2NlcnQgbWFj\n" +
-            "cm93QE1hY3Jvdy1tYnAubG9jYWwgKE1hY3JvdykwHhcNMjIwMzE2MDMxMTA5WhcN\n" +
-            "MjQwNjE2MDMxMTA5WjBUMScwJQYDVQQKEx5ta2NlcnQgZGV2ZWxvcG1lbnQgY2Vy\n" +
-            "dGlmaWNhdGUxKTAnBgNVBAsMIG1hY3Jvd0BNYWNyb3ctbWJwLmxvY2FsIChNYWNy\n" +
-            "b3cpMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2ERrTEnQUHviw17Q\n" +
-            "qsoSMz0VPcL7nnVRJL85oC+xKuCRYN2VxGI4kda3p5PQICM9Hn/mS6TrgoG8hV0B\n" +
-            "6k1rLUbc8vWbCUF1aTzH4yuBsdJMAhMp49cuTfvI6dpPNuKbIiP1VnatwUJK1Uwc\n" +
-            "cEtJ4WwW0XLl6Y9dZSFZmModY3b/DBOYsQMCdzQdRh2hHLRKcA2Lqt7pwKQyUQcq\n" +
-            "7nC+au12iYItA78W5cSI6jUY8MWlEWrikbZWTMaCFmfcc9vphFhgM5Nu8kXIZkQ8\n" +
-            "q7aEonoAa2NSKZyBn+E5qk3nL0TpInWwzFIKJF9Fg/hj/eMYXGMCxBLZ/hvsMdwD\n" +
-            "CqL2/QIDAQABo14wXDAOBgNVHQ8BAf8EBAMCBaAwEwYDVR0lBAwwCgYIKwYBBQUH\n" +
-            "AwEwHwYDVR0jBBgwFoAUWxPQtO3iGndFhebFMci4Dzp//cwwFAYDVR0RBA0wC4IJ\n" +
-            "bG9jYWxob3N0MA0GCSqGSIb3DQEBCwUAA4IBgQCc0YQSZZtGerarWqNmUsPhaMsX\n" +
-            "k3SiHZSCXYdP8QF/b6QQvVaFUpV+FOC4eySrVe3U/JfB7qNmGJITAr5Q5kM5qsue\n" +
-            "D35LNz57xYtxRhRD1sqI7Asvp6crtrdlNeYPKVeS50/lqQ8IJDnEbHa0/V6QxBVf\n" +
-            "JRQ9n15rznVJO6B512k8QVl0qNfiBfzwsW8AVyTGglooHw3GPvZX7ctZ/InRX3WV\n" +
-            "bbtdvgXfqYIKtNb/X5q8O5zwjhneUbrlRSIFYwZDDBKMyyOi6hRtSM/5ZHhoOTgw\n" +
-            "2a1hxt9kpaXjMfOFygPGDlVE+eIU0ERFJ4QKC5Uc1AAwqomqoYbwphTrd2FaFGLB\n" +
-            "/upVraZs8XO9G7DGRZ9ZiTTa8k1oXBOMtbrn2hc+sRuZvycp0fI2uUOwzdaW6fhA\n" +
-            "HgWsFCHMumasp4fm6wy8mWmpSMnj1OBvqLhtjfUjOULX4EFI9hp9L3xXfsV614/5\n" +
-            "VYEgTSBFOCr6W/2vEvXLnWzdR8gdyrsOyshbiCE=\n" +
-            "-----END CERTIFICATE-----";
-    final String KEY = "-----BEGIN PUBLIC KEY-----\n" +
-            "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6Y8ohl2AjcYSDkOLzU9a\n" +
-            "rh4I/nsHGZ8fGY2ojOKzRvFAOxMoL46qqiPSYSr5tsAMuI9+mT8eOI2g6EJffyA2\n" +
-            "PcbWohN51g+BnYVhI+rZc2GDTtxeR6VIAbMiPv/7hnpGaf/6+eJXzCz2m7SWtsnp\n" +
-            "p9MLYGQIgSdXwEn5JmcCNOWl3ES2AhDEAOvgkA0t019vAT5j+eOC3yEmWmjA/mK3\n" +
-            "XoME02v2y4wRjqR9woGI/q24KQ79lIzOeH7xmJ46NCqVMyVagQ7n5KPEECsckBAv\n" +
-            "exQvcpelg4C5uA3igl9kyOP8dyvEJKJys9WdO1RU454qn5Kb5CR07ltFC91p4XGo\n" +
-            "CQIDAQAB\n" +
-            "-----END PUBLIC KEY-----";
-    final String TOKEN = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaWQiOiJhZG1pbl93ZWIiLCJkbiI6IkNocm9tZSIsImV4cCI6MTY4MDI0NzM0NiwiaWF0IjoxNjQ4NzExMzQ2LCJpZCI6ImM5Mmxjb2Zrb2JqazFwc3JsZm8wIiwiaXNzIjoidWNzIiwibmFtZSI6InJvb3QifQ.GiPVB1xumTXx-HrhliT12vRpFb0FeKz0kLJ0uIjwRffHGQjMeyQezh3GPt2Mx7ZDOAknjVA9mJ-aA7SOogjRTQezU0qfAFN1I6T8Xk6Lw9SzvRZUTH3-vwBrAxHC2MI9SMY2_hPFKL9PiEWnbtOo3uT-KPYwERydOS_EfuroyHjyKviJaNOVOFBSflTrl8avOGKOZzCuDY0yHQVxCIt4qjAGPxoC-EBzEmWagKughaWCFQyT-fK_X7c8_5GzLgktNl0sxOkFb1i8futogExNDNyq0A6lFZKkT9k5gDiliLixx9shSvC1NR3o58fYfVKoLrbjxoVruPu0yUv2noytJA";
-
-    @Test
-    public void testValidator() {
-        Validator v = new Validator(KEY);
-        JwtUser jwtUser = v.ValidateJwt(TOKEN);
-        System.out.println(JSONUtil.toJsonStr(jwtUser));
-    }
-
-    @Test
-    public void testRpcNormal() {
-        Client c = new RpcClient("localhost:8919");
-        c = c.SetToken(TOKEN);
-        testValidateStaff(c);
-    }
-
-    @Test
-    public void testRpcTLS() {
-        Client c = new RpcClient(CERT, "localhost:8919");
-        c = c.SetToken(TOKEN);
-        testValidateStaff(c);
-    }
+    final String TOKEN = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaWQiOiJhZG1pbl93ZWIiLCJkbiI6IkNocm9tZSIsImV4cCI6MTY4NjMyNjcwMywiaWF0IjoxNjU0NzkwNzAzLCJpZCI6ImNhaDFrOHV2OW1jNnU1dTdmaWNnIiwiaXNzIjoidWNzIiwibmFtZSI6InJvb3QifQ.GtGvfltbGmV79SWoxaPX6dYrTyaHGLak_Zg3D7PfujJWMDBi5R8s0POS2TRm7LNFZxUeqRancjj9EGPnKdWsw9oH_nCPBjVhF_YY0U9CqtMnI6WAIrtIt9ouOJxfIW_TmJQumHzaqrclULAoL-_-LgoKJFiLuHhcOtsuinK0eH0UHsF7ruW0YY1a1E3pg6gKVjom17Y1V1RaLjDQpirqojfQtqZjgpaaa2IRBMSvmtLXfG1BFAIQd_SSr3EqugxQItkp5rQdMJzNWHhHn041pmE2dHXA1n7UmBha9z1q2jo8u4EkPzUYD2AxRJVs3k1GiesByGR_UOyrVbmS1ojYFQ";
+    final String CLIENT_ID = "wsTDJzgAKg";
+    final String CLIENT_SECRET = "123456";
 
     @Test
     public void testHttpNormal() {
         Client c = new HttpClient("http://localhost:8019", "1A2B3C4D");
-        c = c.SetToken(TOKEN);
+        c = c.SetUserToken(TOKEN).SetClientIdAndSecret(CLIENT_ID, CLIENT_SECRET);
         testValidateStaff(c);
     }
 
     @Test
     public void testHttpTLS() {
         Client c = new HttpClient("https://localhost:8019", "1A2B3C4D");
-        c = c.SetToken(TOKEN);
+        c = c.SetUserToken(TOKEN);
         testValidateStaff(c);
     }
 
     private void testValidateStaff(Client c) {
         UcsResult res;
-        res = c.ValidateJwt();
+        res = c.UserValidateJwt();
         print(res);
 
-        res = c.ValidatePermOperationByCode("UCS_USER_LIST");
+        res = c.UserValidatePermOperationByCode("UCS_USER_LIST");
         print(res);
 
-        res = c.ValidatePermAction("ucs", "/api/v1/ucs/users", "get");
+        res = c.UserValidatePermAction("ucs", "/api/v1/ucs/users", "get");
         print(res);
 
-        res = c.ValidatePermActionWithOrgId("ucs", "/api/v1/ucs/users", "get", "c8fjca649b3hbmov5n60");
+        res = c.UserValidatePermActionWithOrgId("ucs", "/api/v1/ucs/users", "get", "c8fjca649b3hbmov5n60");
         print(res);
 
-        res = c.ValidatePermActionWithOrgId("ucs", "/api/v1/ucs/users", "get", "fasdfasdfasdf");
+        res = c.UserValidatePermActionWithOrgId("ucs", "/api/v1/ucs/users", "get", "fasdfasdfasdf");
         print(res);
 
-        res = c.ValidatePermOrgById("fasdfasdfasdf");
+        res = c.UserValidatePermOrgById("fasdfasdfasdf");
         print(res);
 
-        res = c.ValidatePermOrgById("c8fjca649b3hbmov5n60");
+        res = c.UserValidatePermOrgById("c8fjca649b3hbmov5n60");
         print(res);
 
-        res = c.QueryOrgIdsByAction("ucs", "/api/v1/ucs/users", "get");
+        res = c.UserQueryOrgIdsByAction("ucs", "/api/v1/ucs/users", "get");
         print(res);
 
-        res = c.OAuth2TokenByPassword("root", "123456", "test", "ucs-java-sdk");
-        print(res);
+        UcsResult<Object> clientRes = c.ClientRequest("POST", "/api/v1/ucs/client/validate", null);
+        print(clientRes);
     }
 
     private void print(UcsResult res) {
