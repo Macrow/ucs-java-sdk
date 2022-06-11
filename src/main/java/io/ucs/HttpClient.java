@@ -1,4 +1,4 @@
-package ucs.org;
+package io.ucs;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.RandomUtil;
@@ -18,8 +18,8 @@ import java.util.Map;
  * @date 2022-03-17
  */
 public class HttpClient implements Client {
-    private final String baseUrl;
-    private final String accessCode;
+    private String baseUrl;
+    private String accessCode;
     private String accessCodeHeader;
     private String randomKeyHeader;
     private String userTokenHeader;
@@ -39,7 +39,7 @@ public class HttpClient implements Client {
     }
 
     @Override
-    public Client SetTimeout(int timeout) {
+    public Client setTimeout(int timeout) {
         if (timeout > 0) {
             this.timeout = timeout;
         }
@@ -47,20 +47,32 @@ public class HttpClient implements Client {
     }
 
     @Override
-    public Client SetUserToken(String token) {
+    public Client setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
+        return this;
+    }
+
+    @Override
+    public Client setAccessCode(String accessCode) {
+        this.accessCode = accessCode;
+        return this;
+    }
+
+    @Override
+    public Client setUserToken(String token) {
         this.userToken = token;
         return this;
     }
 
     @Override
-    public Client SetClientIdAndSecret(String clientId, String clientSecret) {
+    public Client setClientIdAndSecret(String clientId, String clientSecret) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         return this;
     }
 
     @Override
-    public Client SetHttpHeaderNames(String accessCodeHeader, String randomKeyHeader, String userTokenHeader, String clientTokenHeader) {
+    public Client setHttpHeaderNames(String accessCodeHeader, String randomKeyHeader, String userTokenHeader, String clientTokenHeader) {
         this.accessCodeHeader = accessCodeHeader;
         this.randomKeyHeader = randomKeyHeader;
         this.userTokenHeader = userTokenHeader;
@@ -69,54 +81,33 @@ public class HttpClient implements Client {
     }
 
     @Override
-    public UcsResult<Object> UserValidateJwt() {
+    public UcsResult<JwtUser> userValidateJwt() {
         return request(Constant.ValidateJwtURL, Method.GET, null, RequestType.USER);
     }
 
     @Override
-    public UcsResult<PermitResult> UserValidatePermOperationByCode(String code) {
+    public UcsResult<PermitResult> userValidatePermByOperation(String code) {
         Map<String, Object> formData = new HashMap<>();
         formData.put("code", code);
         return request(Constant.ValidatePermOperationByCodeURL, Method.POST, formData, RequestType.USER);
     }
 
     @Override
-    public UcsResult<PermitResult> UserValidatePermAction(String service, String path, String method) {
+    public UcsResult<PermitResult> userValidatePermByAction(String service, String method, String path) {
         Map<String, Object> formData = new HashMap<>();
         formData.put("service", service);
-        formData.put("path", path);
         formData.put("method", method);
+        formData.put("path", path);
         return request(Constant.ValidatePermActionURL, Method.POST, formData, RequestType.USER);
     }
 
     @Override
-    public UcsResult<PermitResult> UserValidatePermOrgById(String orgId) {
-        Map<String, Object> formData = new HashMap<>();
-        formData.put("id", orgId);
-        return request(Constant.ValidatePermOrgByIdURL, Method.POST, formData, RequestType.USER);
+    public <T> UcsResult<T> userRequest(String method, String url, Map<String, Object> data) {
+        return request(url, getHttpMethod(method), data, RequestType.USER);
     }
 
     @Override
-    public UcsResult<PermitResult> UserValidatePermActionWithOrgId(String service, String path, String method, String orgId) {
-        Map<String, Object> formData = new HashMap<>();
-        formData.put("service", service);
-        formData.put("path", path);
-        formData.put("method", method);
-        formData.put("orgId", orgId);
-        return request(Constant.ValidatePermActionWithOrgIdURL, Method.POST, formData, RequestType.USER);
-    }
-
-    @Override
-    public UcsResult<OrgIdsResult> UserQueryOrgIdsByAction(String service, String path, String method) {
-        Map<String, Object> formData = new HashMap<>();
-        formData.put("service", service);
-        formData.put("path", path);
-        formData.put("method", method);
-        return request(Constant.QueryOrgIdsByActionURL, Method.POST, formData, RequestType.USER);
-    }
-
-    @Override
-    public <T> UcsResult<T> ClientRequest(String method, String url, Map<String, Object> data) {
+    public <T> UcsResult<T> clientRequest(String method, String url, Map<String, Object> data) {
         return request(url, getHttpMethod(method), data, RequestType.CLIENT);
     }
 

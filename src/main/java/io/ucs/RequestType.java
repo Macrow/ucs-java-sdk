@@ -1,4 +1,4 @@
-package ucs.org;
+package io.ucs;
 
 /**
  * @author Macrow
