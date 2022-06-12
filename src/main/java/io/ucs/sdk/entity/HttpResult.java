@@ -1,4 +1,4 @@
-package io.ucs;
+package io.ucs.sdk.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,12 +7,14 @@ import lombok.Setter;
 
 /**
  * @author Macrow
- * @date 2022-04-01
+ * @date 2022-03-17
  */
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
-public class AccessTokenResult {
-    private String accessToken;
+public class HttpResult<T> {
+    private T result;
+    private Integer code;
+    private String message;
 }

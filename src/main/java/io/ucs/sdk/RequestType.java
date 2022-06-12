@@ -1,4 +1,4 @@
-package io.ucs;
+package io.ucs.sdk;
 
 /**
  * @author Macrow

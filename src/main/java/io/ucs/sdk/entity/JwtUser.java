@@ -1,4 +1,4 @@
-package io.ucs;
+package io.ucs.sdk.entity;
 
 import lombok.*;
 
@@ -16,10 +16,10 @@ import java.util.Date;
 public class JwtUser {
     private String id;
     private String name;
-    private String deviceId;
-    private String deviceName;
-    private String issuer;
-    private Date issueAt;
-    private Date expireAt;
+    private String did;
+    private String dn;
+    private String iss;
+    private Date iat;
+    private Date exp;
     private String token;
 }

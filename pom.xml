@@ -29,6 +29,7 @@
     <junit.version>4.13.2</junit.version>
     <lombok.version>1.18.24</lombok.version>
     <hutool.version>5.8.1</hutool.version>
+    <unirest-java.version>3.13.10</unirest-java.version>
     <annotations-api.version>6.0.53</annotations-api.version>
   </properties>
 
@@ -48,6 +49,12 @@
       <groupId>cn.hutool</groupId>
       <artifactId>hutool-all</artifactId>
       <version>${hutool.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.konghq</groupId>
+      <artifactId>unirest-java</artifactId>
+      <version>${unirest-java.version}</version>
+      <classifier>standalone</classifier>
     </dependency>
     <dependency> <!-- necessary for Java 9+ -->
       <groupId>org.apache.tomcat</groupId>

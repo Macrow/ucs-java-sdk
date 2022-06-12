@@ -2,6 +2,9 @@ package io.ucs;
 
 import cn.hutool.json.JSONConfig;
 import cn.hutool.json.JSONUtil;
+import io.ucs.sdk.Client;
+import io.ucs.sdk.UcsHttpClient;
+import io.ucs.sdk.entity.UcsResult;
 import org.junit.Test;
 
 public class ModuleTest {
@@ -11,14 +14,14 @@ public class ModuleTest {
 
     @Test
     public void testHttpNormal() {
-        Client c = new HttpClient("http://localhost:8019", "1A2B3C4D");
+        Client c = new UcsHttpClient("http://localhost:8019", "1A2B3C4D");
         c = c.setUserToken(TOKEN).setClientIdAndSecret(CLIENT_ID, CLIENT_SECRET);
         testValidateStaff(c);
     }
 
     @Test
     public void testHttpTLS() {
-        Client c = new HttpClient("https://localhost:8019", "1A2B3C4D");
+        Client c = new UcsHttpClient("https://localhost:8019", "1A2B3C4D");
         c = c.setUserToken(TOKEN).setClientIdAndSecret(CLIENT_ID, CLIENT_SECRET);
         testValidateStaff(c);
     }
@@ -28,16 +31,16 @@ public class ModuleTest {
         res = c.userValidateJwt();
         print(res);
 
-        res = c.userValidatePermByOperation("UCS_USER_LIST");
+        res = c.userValidatePermByOperation("UCS_USER_LIST", false);
         print(res);
 
-        res = c.userValidatePermByAction("ucs", "get", "/api/v1/ucs/users");
+        res = c.userValidatePermByAction("ucs", "get", "/api/v1/ucs/users", false);
         print(res);
 
-        UcsResult<Object> userRes = c.userRequest("GET", "/api/v1/ucs/users", null);
+        UcsResult<Object> userRes = c.userRequest(Object.class, "GET", "/api/v1/ucs/users", null);
         print(userRes);
 
-        UcsResult<Object> clientRes = c.clientRequest("POST", "/api/v1/ucs/client/validate", null);
+        UcsResult<Object> clientRes = c.clientRequest(Object.class, "POST", "/api/v1/ucs/client/validate", null);
         print(clientRes);
     }
 
