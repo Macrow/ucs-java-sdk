@@ -17,7 +17,7 @@
 
 ### 安装，请指定版本
 ```
-dependency>
+<dependency>
     <groupId>com.github.Macrow</groupId>
     <artifactId>ucs-java-sdk</artifactId>
     <version>${ucs-java-sdk.version}</version>
