@@ -52,5 +52,5 @@ Result res = client.UserValidatePermOrgById("org_id_is_here");
 
 ### 向UCS服务端发起应用级调用
 ```
-UcsResult<Object> clientRes = c.ClientRequest("POST", "/api/v1/ucs/client/validate", null);
+UcsResult<Object> clientRes = c.ClientRequest("POST", "/api/v1/ucs/client/validate", null, ClientAuthType.ID_AND_SECRET);
 ```
