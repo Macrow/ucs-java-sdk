@@ -9,7 +9,7 @@ import io.ucs.sdk.entity.UcsResult;
 import org.junit.Test;
 
 public class ModuleTest {
-    final String TOKEN = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaWQiOiJhZG1pbl93ZWIiLCJkbiI6IkNocm9tZSIsImV4cCI6MTY4NzA1ODI1OSwiaWF0IjoxNjU1NTIyMjU5LCJpZCI6ImNhaDFrOHV2OW1jNnU1dTdmaWNnIiwiaXNzIjoidWNzIiwibmFtZSI6InJvb3QifQ.m2uOt7IlZpfng_UhBM2aeVETjhABp0sreAeqgJRT6QejXhaogNY3qXjr-ANi_oXqsVkA0Tof3z2qCMwl0mrHc5WEHXPvCRr_gOJ184z10Lf1z6cxaaQ4gt1R3TlCHst3DIlyl4iRAstLjfnlmm3aTWYZMjK-d3FXKA6i2yWZAXMInEoijpNMlYFGaojFfEZjlTPTp_Lmj4Spus7s8f_AjvckUJfYcymvRJHR9M7YEgRq2Lu_E-y4IsCGt9PphDah12JFv8-qg6UWFheiNIgg5rcQ0KKZcal73wpm9tmVEpJbn8SBsRV_tMfIOvjC8Vvbfh_-DoYWD3ZNtivrd8VMbg";
+    final String TOKEN = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaWQiOiJhZG1pbl93ZWIiLCJkbiI6IkNocm9tZSIsImV4cCI6MTY4ODM3NTYxMiwiaWF0IjoxNjU2ODM5NjEyLCJpZCI6ImNiMGxyYnV2OW1jNzE5NzY0ZXBnIiwiaXNzIjoidWNzIiwibmFtZSI6InJvb3QifQ.4IQ5Ewy6FCB8cs2gWulS57iSC7AVUr5B4klNXOSYRof0yX3V4UktrVV1SX9mlhv3oc3Js_tLY9CtPizX8f5yGlWlkjyRZYrg0ueKOFnquRrsF3n7SwqIMCVDRxD9ale1vxxn4aSL8H-ZH3yXzXoqIy-dJPYqqmlO362L0WfxT6jyRLzVTr7pis9MZuircPJVnC5HTvKL4_Qb2V_7zvC3mly1s6lEnlXQ4waTsRrCzsh57px19YluWDJY_jlXFKTBdu6Mot11CNz_n0UpRSsUaQYr9BuhGpEauvjpAPqYr3JTDzDxl02OJ-OrCjTV_E4N0lxRlIS57uqiFSXTzNlXtA";
     final String CLIENT_ID = "wsTDJzgAKg";
     final String CLIENT_SECRET = "123456";
 
@@ -32,10 +32,10 @@ public class ModuleTest {
         res = c.userValidateJwt();
         print(res);
 
-        res = c.userValidatePermByOperation("UCS_USER_LIST", false);
+        res = c.userValidatePermByOperation("UCS_USER_LIST", true, true);
         print(res);
 
-        res = c.userValidatePermByAction("ucs", "get", "/api/v1/ucs/users", false);
+        res = c.userValidatePermByAction("ucs", "get", "/api/v1/ucs/users", false, true);
         print(res);
 
         UcsResult<Object> userRes = c.userRequest(Object.class, "GET", "/api/v1/ucs/users", null);

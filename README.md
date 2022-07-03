@@ -30,27 +30,23 @@ Client client = new HttpClient("https://your.domain.com:port", yourAccessCode");
 client.SetUserToken(TOKEN).SetClientIdAndSecret(CLIENT_ID, CLIENT_SECRET);
 ```
 
-### UCS服务端验证Jwt
+### UCS服务端验证用户信息
 ```
-Result res = client.UserValidateJwt();
-```
-
-### UCS服务端验证操作码
-```
-Result res = client.UserValidatePermOperationByCode("UCS_O_CODE");
+Result res = client.userValidateJwt();
 ```
 
-### UCS服务端验证接口
+### UCS服务端验证客户端信息
 ```
-Result res = client.UserValidatePermAction("ucs", "/api/v1/ucs/users", "get");
+Result res = client.clientValidate();
 ```
 
-### UCS服务端验证用户是否拥有机构权限
+### UCS服务端验证操作或接口
 ```
-Result res = client.UserValidatePermOrgById("org_id_is_here");
+Result res = client.userValidatePermByOperation("UCS_USER_LIST", true, true);
+Result res = client.userValidatePermByAction("ucs", "get", "/api/v1/ucs/users", true, true);
 ```
 
 ### 向UCS服务端发起应用级调用
 ```
-UcsResult<Object> clientRes = c.ClientRequest("POST", "/api/v1/ucs/client/validate", null, ClientAuthType.ID_AND_SECRET);
+UcsResult<Object> clientRes = ucsHttpClient.clientRequest(Object.class, "GET", "/api/v1/ucs/client/validate", null, ClientAuthType.ID_AND_SECRET);
 ```
