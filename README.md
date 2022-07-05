@@ -26,24 +26,24 @@
 
 ### 创建连接UCS的客户端
 ```
-Client client = new HttpClient("https://your.domain.com:port", yourAccessCode"); // Http方式
-client.SetUserToken(TOKEN).SetClientIdAndSecret(CLIENT_ID, CLIENT_SECRET);
+Client c = new UcsHttpClient("https://localhost:8019");
+c = c.setAccessCode(ACCESS_CODE).setUserToken(TOKEN).setClientIdAndSecret(CLIENT_ID, CLIENT_SECRET);
 ```
 
 ### UCS服务端验证用户信息
 ```
-Result res = client.userValidateJwt();
+UcsResult res = c.setRandomKey(UcsHttpClient.generateRandomKey()).userValidateJwt();
 ```
 
 ### UCS服务端验证客户端信息
 ```
-Result res = client.clientValidate();
+UcsResult res = c.setRandomKey(UcsHttpClient.generateRandomKey()).clientValidate(ClientAuthType.ID_AND_SECRET);
 ```
 
 ### UCS服务端验证操作或接口
 ```
-Result res = client.userValidatePermByOperation("UCS_USER_LIST", true, true);
-Result res = client.userValidatePermByAction("ucs", "get", "/api/v1/ucs/users", true, true);
+UcsResult res = client.userValidatePermByOperation("UCS_USER_LIST", true, true);
+UcsResult res = client.userValidatePermByAction("ucs", "get", "/api/v1/ucs/users", true, true);
 ```
 
 ### 向UCS服务端发起应用级调用
